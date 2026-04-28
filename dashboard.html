@@ -111,15 +111,33 @@
     .kpi-tile.l1 { color: #0a7c42; }
     .kpi-tile.l2 { color: #003c71; }
     .kpi-tile.l3 { color: #5b2d8e; }
-    .kpi-tile.total {
+    .kpi-tile-sm { padding: 0.6rem 0.5rem; }
+    .kpi-tile-sm .kpi { font-size: clamp(0.95rem, 2.1vw, 1.35rem); line-height: 1.1; }
+    .kpi-tile-sm .kpi-sub { font-size: 0.6rem; line-height: 1.2; margin-top: 0.3rem; letter-spacing: 0.04em; }
+    .kpi-tile.total-small {
       background: #003c71;
       color: #fff;
       border: 1px solid #003c71;
       border-left: 4px solid #fff;
-      padding: 1.25rem;
     }
-    .kpi-tile.total .kpi { color: #fff; font-size: clamp(1.8rem, 3.2vw, 2.4rem); }
-    .kpi-tile.total .kpi-sub { color: rgba(255,255,255,0.85); }
+    .kpi-tile.total-small .kpi { color: #fff; }
+    .kpi-tile.total-small .kpi-sub { color: rgba(255,255,255,0.85); }
+
+    .chart-area {
+      background: #fafbfc;
+      border: 1px solid #eee;
+      border-radius: 0.5rem;
+      padding: 0.9rem 1rem 0.6rem;
+    }
+    .chart-area .chart-title {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #6b7280;
+      margin-bottom: 0.4rem;
+    }
+    .chart-area svg { width: 100%; max-width: 540px; display: block; margin: 0 auto; }
 
     .summary-callout {
       background: #f5f7fb;
@@ -303,30 +321,54 @@
         <div class="card-panel">
           <p class="section-label mb-3">Outputs</p>
 
-          <div class="row g-3 mb-3">
-            <div class="col-sm-4">
-              <div class="kpi-tile l1">
+          <div class="row g-2 mb-3">
+            <div class="col-6 col-sm-3">
+              <div class="kpi-tile kpi-tile-sm l1">
                 <div class="kpi" x-text="fmt(l1())">$0M</div>
-                <div class="kpi-sub">Layer 1: Wabtec revenue</div>
+                <div class="kpi-sub">L1: Revenue</div>
               </div>
             </div>
-            <div class="col-sm-4">
-              <div class="kpi-tile l2">
+            <div class="col-6 col-sm-3">
+              <div class="kpi-tile kpi-tile-sm l2">
                 <div class="kpi" x-text="fmt(l2())">$0M</div>
-                <div class="kpi-sub">Layer 2: Wabtec EBITDA</div>
+                <div class="kpi-sub">L2: EBITDA</div>
               </div>
             </div>
-            <div class="col-sm-4">
-              <div class="kpi-tile l3">
+            <div class="col-6 col-sm-3">
+              <div class="kpi-tile kpi-tile-sm l3">
                 <div class="kpi" x-text="fmt(l3())">$0M</div>
-                <div class="kpi-sub">Layer 3: Customer savings</div>
+                <div class="kpi-sub">L3: Cust. savings</div>
+              </div>
+            </div>
+            <div class="col-6 col-sm-3">
+              <div class="kpi-tile kpi-tile-sm total-small">
+                <div class="kpi" x-text="fmt(l1() + l2())">$0M</div>
+                <div class="kpi-sub">Combined L1+L2</div>
               </div>
             </div>
           </div>
 
-          <div class="kpi-tile total mb-3">
-            <div class="kpi" x-text="fmt(l1() + l2()) + '/yr'">$0M/yr</div>
-            <div class="kpi-sub">Combined Wabtec value (Layer 1 + Layer 2)</div>
+          <div class="chart-area mb-3">
+            <div class="chart-title">Value contribution by layer ($M/yr)</div>
+            <svg viewBox="0 0 360 210" xmlns="http://www.w3.org/2000/svg" aria-label="Bar chart of three value layers">
+              <line x1="30" y1="20"  x2="30"  y2="160" stroke="#d8dde3" stroke-width="1"/>
+              <line x1="30" y1="160" x2="350" y2="160" stroke="#d8dde3" stroke-width="1"/>
+
+              <rect x="70"  :y="160 - barH(l1())" width="60" :height="barH(l1())" fill="#0a7c42" rx="2"/>
+              <text x="100" :y="160 - barH(l1()) - 6" text-anchor="middle" font-size="13" font-weight="700" fill="#0a7c42" x-text="fmt(l1())"></text>
+              <text x="100" y="178" text-anchor="middle" font-size="11" font-weight="600" fill="#444">Layer 1</text>
+              <text x="100" y="194" text-anchor="middle" font-size="9.5" fill="#888">Wabtec revenue</text>
+
+              <rect x="160" :y="160 - barH(l2())" width="60" :height="barH(l2())" fill="#003c71" rx="2"/>
+              <text x="190" :y="160 - barH(l2()) - 6" text-anchor="middle" font-size="13" font-weight="700" fill="#003c71" x-text="fmt(l2())"></text>
+              <text x="190" y="178" text-anchor="middle" font-size="11" font-weight="600" fill="#444">Layer 2</text>
+              <text x="190" y="194" text-anchor="middle" font-size="9.5" fill="#888">Wabtec EBITDA</text>
+
+              <rect x="250" :y="160 - barH(l3())" width="60" :height="barH(l3())" fill="#5b2d8e" rx="2"/>
+              <text x="280" :y="160 - barH(l3()) - 6" text-anchor="middle" font-size="13" font-weight="700" fill="#5b2d8e" x-text="fmt(l3())"></text>
+              <text x="280" y="178" text-anchor="middle" font-size="11" font-weight="600" fill="#444">Layer 3</text>
+              <text x="280" y="194" text-anchor="middle" font-size="9.5" fill="#888">Customer savings</text>
+            </svg>
           </div>
 
           <p class="summary-callout mb-3" x-text="summary()"></p>
@@ -411,6 +453,8 @@
         l2: function () { return this.servCOGS * 1000 * (this.effGain / 100); },
         maintBase: function () { return this.fleet * this.maintUnit / 1000; },
         l3: function () { return this.maintBase() * (this.maintRed / 100); },
+        maxLayer: function () { var m = Math.max(this.l1(), this.l2(), this.l3()); return m > 0 ? m : 1; },
+        barH: function (v) { return (v / this.maxLayer()) * 130; },
         fmt: function (n) {
           if (Math.abs(n) >= 1000) return '$' + (n / 1000).toFixed(1) + 'B';
           return '$' + Math.round(n) + 'M';
