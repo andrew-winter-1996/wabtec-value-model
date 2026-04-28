@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wabtec AI Obsolescence Management Value Sizing</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: #f7f8fa; color: #1a1a2e; padding: 24px; max-width: 960px; margin: 0 auto; }
+  h1 { font-size: 20px; font-weight: 700; margin-bottom: 4px; color: #003c71; }
+  .subtitle { font-size: 13px; color: #666; margin-bottom: 24px; }
+  .section { background: #fff; border-radius: 8px; padding: 20px; margin-bottom: 16px; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
+  .section-title { font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 16px; padding-bottom: 8px; border-bottom: 2px solid #003c71; }
+  .section-title.green { border-color: #0a7c42; }
+  .section-title.blue { border-color: #003c71; }
+  .section-title.purple { border-color: #5b2d8e; }
+  .row { display: flex; align-items: center; margin-bottom: 12px; gap: 12px; }
+  .row label { flex: 0 0 280px; font-size: 13px; }
+  .row input[type=range] { flex: 1; accent-color: #003c71; }
+  .row .val { flex: 0 0 100px; text-align: right; font-weight: 600; font-size: 14px; font-variant-numeric: tabular-nums; }
+  .source { font-size: 11px; color: #999; margin-top: 2px; }
+  .output-row { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid #eee; }
+  .output-row:last-child { border-bottom: none; }
+  .output-label { font-size: 13px; }
+  .output-val { font-size: 16px; font-weight: 700; font-variant-numeric: tabular-nums; }
+  .output-val.green { color: #0a7c42; }
+  .output-val.blue { color: #003c71; }
+  .output-val.purple { color: #5b2d8e; }
+  .total-bar { background: #003c71; color: #fff; border-radius: 8px; padding: 20px; margin-top: 16px; display: flex; justify-content: space-between; align-items: center; }
+  .total-bar .label { font-size: 14px; font-weight: 600; }
+  .total-bar .number { font-size: 28px; font-weight: 700; font-variant-numeric: tabular-nums; }
+  .assumptions { font-size: 11px; color: #888; margin-top: 16px; line-height: 1.6; }
+  .assumptions strong { color: #555; }
+  @media (max-width: 700px) { .row label { flex: 0 0 180px; } }
+</style>
+</head>
+<body>
+
+<h1>Wabtec AI-Enabled Obsolescence Management</h1>
+<p class="subtitle">Sensitivity model with three value layers</p>
+
+<div class="section">
+  <div class="section-title green">Layer 1: Revenue Uplift (Incremental Bookings)</div>
+  <div class="row">
+    <label>Freight services base ($B/yr) <div class="source">Source: Wabtec Q1 2025 earnings, annualized</div></label>
+    <input type="range" id="servBase" min="2.5" max="5.0" step="0.1" value="3.4">
+    <div class="val" id="servBaseVal">$3.4B</div>
+  </div>
+  <div class="row">
+    <label>Bookings uplift (%) <div class="source">Source: Water OEM Demeter analogue, Commercial Acceleration deck</div></label>
+    <input type="range" id="uplift" min="5" max="25" step="1" value="12">
+    <div class="val" id="upliftVal">12%</div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-title blue">Layer 2: Wabtec Margin Improvement (Service Delivery Efficiency)</div>
+  <div class="row">
+    <label>Service delivery COGS ($B/yr) <div class="source">Source: ~63% COGS ratio on freight services base</div></label>
+    <input type="range" id="servCOGS" min="1.5" max="3.5" step="0.1" value="2.1">
+    <div class="val" id="servCOGSVal">$2.1B</div>
+  </div>
+  <div class="row">
+    <label>Efficiency gain (%) <div class="source">Source: Predictive scheduling, parts pre-staging, reduced rework</div></label>
+    <input type="range" id="effGain" min="1" max="8" step="0.5" value="2.5">
+    <div class="val" id="effGainVal">2.5%</div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-title purple">Layer 3: Customer Savings (Modernization Demand Driver)</div>
+  <div class="row">
+    <label>Fleet size (locomotives) <div class="source">Source: Wabtec corporate, installed base</div></label>
+    <input type="range" id="fleet" min="15000" max="30000" step="500" value="24600">
+    <div class="val" id="fleetVal">24,600</div>
+  </div>
+  <div class="row">
+    <label>Annual maintenance per unit ($K) <div class="source">Source: DOE / CARB data, freight line-haul</div></label>
+    <input type="range" id="maintUnit" min="75" max="200" step="5" value="125">
+    <div class="val" id="maintUnitVal">$125K</div>
+  </div>
+  <div class="row">
+    <label>Maintenance spend reduction (%) <div class="source">Source: McKinsey reliability slide (MVI Meeting Prep)</div></label>
+    <input type="range" id="maintRed" min="5" max="20" step="1" value="10">
+    <div class="val" id="maintRedVal">10%</div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-title">Results</div>
+  <div class="output-row">
+    <span class="output-label">Layer 1: Incremental annual bookings (Wabtec revenue)</span>
+    <span class="output-val green" id="out1">$408M</span>
+  </div>
+  <div class="output-row">
+    <span class="output-label">Layer 2: Annual margin improvement (Wabtec EBITDA)</span>
+    <span class="output-val blue" id="out2">$53M</span>
+  </div>
+  <div class="output-row">
+    <span class="output-label">Layer 3: Annual customer maintenance savings (demand driver)</span>
+    <span class="output-val purple" id="out3">$308M</span>
+  </div>
+  <div class="output-row">
+    <span class="output-label">Fleet-wide maintenance base</span>
+    <span class="output-val" id="outMaintBase" style="color:#555">$3.1B</span>
+  </div>
+</div>
+
+<div class="total-bar">
+  <span class="label">Combined Wabtec value (Layer 1 + Layer 2)</span>
+  <span class="number" id="outTotal">$461M/yr</span>
+</div>
+
+<div class="assumptions">
+  <strong>Sources and assumptions:</strong> Freight services base from Wabtec Q1 2025 earnings ($863M x 4). Bookings uplift from Water OEM Demeter case (Commercial Acceleration deck, 12-15%). Service COGS estimated at ~63% of services revenue (Wabtec adjusted gross margin ~37%, Q1 2026). Maintenance cost per unit from DOE/CARB analysis ($125K/yr freight line-haul). Maintenance spend reduction from McKinsey reliability use cases slide (MVI Meeting Prep, 10-15%). Fleet size from Wabtec corporate materials (~24,600 units). Layer 3 is not additive to Layers 1-2. It represents the customer value proposition that enables Layer 1 bookings.
+</div>
+
+<script>
+var getEl = function(id) { return document.getElementById(id); };
+var fmt = function(n) {
+  if (Math.abs(n) >= 1000) return '$' + (n/1000).toFixed(1) + 'B';
+  return '$' + Math.round(n) + 'M';
+};
+
+function calc() {
+  var servBase = +getEl('servBase').value;
+  var uplift = +getEl('uplift').value;
+  var servCOGS = +getEl('servCOGS').value;
+  var effGain = +getEl('effGain').value;
+  var fleet = +getEl('fleet').value;
+  var maintUnit = +getEl('maintUnit').value;
+  var maintRed = +getEl('maintRed').value;
+
+  getEl('servBaseVal').textContent = '$' + servBase.toFixed(1) + 'B';
+  getEl('upliftVal').textContent = uplift + '%';
+  getEl('servCOGSVal').textContent = '$' + servCOGS.toFixed(1) + 'B';
+  getEl('effGainVal').textContent = effGain.toFixed(1) + '%';
+  getEl('fleetVal').textContent = fleet.toLocaleString();
+  getEl('maintUnitVal').textContent = '$' + maintUnit + 'K';
+  getEl('maintRedVal').textContent = maintRed + '%';
+
+  var l1 = servBase * 1000 * (uplift / 100);
+  var l2 = servCOGS * 1000 * (effGain / 100);
+  var maintBase = fleet * maintUnit / 1000;
+  var l3 = maintBase * (maintRed / 100);
+
+  getEl('out1').textContent = fmt(l1);
+  getEl('out2').textContent = fmt(l2);
+  getEl('out3').textContent = fmt(l3);
+  getEl('outMaintBase').textContent = fmt(maintBase);
+  getEl('outTotal').textContent = fmt(l1 + l2) + '/yr';
+}
+
+var sliders = document.querySelectorAll('input[type=range]');
+for (var i = 0; i < sliders.length; i++) {
+  sliders[i].addEventListener('input', calc);
+}
+calc();
+</script>
+</body>
+</html>
