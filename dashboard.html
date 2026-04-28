@@ -1,0 +1,604 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Wabtec AI-Enabled Obsolescence Management — Value Model</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='10' fill='%23003c71'/><text x='32' y='42' font-family='Arial' font-size='30' font-weight='700' fill='white' text-anchor='middle'>W</text></svg>">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.9/dist/cdn.min.js"></script>
+  <style>
+    body { background: #f5f7fb; color: #172033; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif; }
+    .shell { max-width: 1200px; }
+    .card-panel {
+      background: #fff;
+      border: 1px solid #e5e7eb;
+      border-radius: 0.75rem;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+      padding: 1.5rem;
+      height: 100%;
+    }
+    .section-label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #6b7280;
+    }
+    .brand-title { color: #003c71; }
+
+    /* Scenario toggle */
+    .scenario-toggle .btn {
+      flex: 1;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+    }
+    .scenario-toggle .btn.active-scenario {
+      background: #003c71;
+      color: #fff;
+      border-color: #003c71;
+    }
+
+    /* Input layer groups */
+    .layer-group { margin-bottom: 1.5rem; }
+    .layer-group:last-child { margin-bottom: 0; }
+    .layer-label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding-bottom: 0.25rem;
+      margin-bottom: 0.85rem;
+      border-bottom: 2px solid currentColor;
+      display: block;
+    }
+    .layer-label.l1 { color: #0a7c42; }
+    .layer-label.l2 { color: #003c71; }
+    .layer-label.l3 { color: #5b2d8e; }
+
+    .input-row { margin-bottom: 0.95rem; }
+    .input-row .input-label {
+      font-size: 0.83rem;
+      font-weight: 600;
+      color: #1a1a2e;
+      margin-bottom: 0.1rem;
+    }
+    .input-row .source {
+      font-size: 0.68rem;
+      color: #999;
+      margin-bottom: 0.3rem;
+    }
+    .input-row .input-line {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .input-row .form-range { flex: 1; accent-color: #003c71; }
+    .input-row .val {
+      flex: 0 0 80px;
+      text-align: right;
+      font-weight: 700;
+      font-size: 0.92rem;
+      font-variant-numeric: tabular-nums;
+      color: #003c71;
+    }
+
+    /* KPI tiles */
+    .kpi-tile {
+      background: #fff;
+      border: 1px solid #e5e7eb;
+      border-left: 4px solid currentColor;
+      border-radius: 0.5rem;
+      padding: 1rem 0.75rem;
+      height: 100%;
+      text-align: center;
+    }
+    .kpi-tile .kpi {
+      font-size: clamp(1.4rem, 2.6vw, 1.85rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+      font-variant-numeric: tabular-nums;
+    }
+    .kpi-tile .kpi-sub {
+      font-size: 0.7rem;
+      color: #6b7280;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      font-weight: 600;
+      margin-top: 0.4rem;
+    }
+    .kpi-tile.l1 { color: #0a7c42; }
+    .kpi-tile.l2 { color: #003c71; }
+    .kpi-tile.l3 { color: #5b2d8e; }
+    .kpi-tile.total {
+      background: #003c71;
+      color: #fff;
+      border: 1px solid #003c71;
+      border-left: 4px solid #fff;
+      padding: 1.25rem;
+    }
+    .kpi-tile.total .kpi { color: #fff; font-size: clamp(1.8rem, 3.2vw, 2.4rem); }
+    .kpi-tile.total .kpi-sub { color: rgba(255,255,255,0.85); }
+
+    .summary-callout {
+      background: #f5f7fb;
+      border-left: 3px solid #003c71;
+      padding: 0.75rem 1rem;
+      font-size: 0.85rem;
+      color: #333;
+      border-radius: 0.25rem;
+      line-height: 1.55;
+    }
+    .footnote {
+      font-size: 0.72rem;
+      color: #888;
+      line-height: 1.5;
+    }
+    .footnote strong { color: #555; }
+
+    [x-cloak] { display: none !important; }
+    body.bg-body { position: relative; margin: 0; min-height: 100vh; }
+    .snapp-scroll-root { position: relative; min-height: 100vh; }
+
+    /* Sticky notes overlay (from snapp starter) */
+    .stickies-layer { position: absolute; left: 0; top: 0; right: 0; bottom: 0; z-index: 1040; pointer-events: none; }
+    .stickies-layer.placement-mode { cursor: crosshair; }
+    .stickies-layer.stickies-layer--fab-drag { cursor: grabbing; }
+    .stickies-drop-preview { position: fixed; z-index: 1052; box-sizing: border-box; width: 220px; height: 160px; margin: 0; padding: 0; pointer-events: none; background: rgba(255, 245, 157, 0.88); border: 2px dashed #bfa94a; border-radius: 4px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.12); }
+    .stickies-drop-preview::before { content: ''; display: block; height: 11px; background: rgba(0, 0, 0, 0.06); box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.08); border-radius: 2px 2px 0 0; }
+    .stickies-fab--armed { box-shadow: 0 0 0 2px rgba(25, 118, 210, 0.45), 0 2px 6px rgba(0, 0, 0, 0.14); }
+    .stickies-fab { position: fixed; right: 1.25rem; bottom: 1.25rem; z-index: 1060; width: 2.75rem; height: 3rem; border-radius: 4px; pointer-events: auto; box-sizing: border-box; background: #fff59d; border: 1px solid #d6c56a; box-shadow: 0 1px 4px rgba(0, 0, 0, 0.12); display: flex; flex-direction: column; align-items: stretch; padding: 0; margin: 0; line-height: 0; cursor: pointer; appearance: none; -webkit-appearance: none; overflow: hidden; color: inherit; }
+    .stickies-fab:hover { filter: brightness(1.03); box-shadow: 0 2px 6px rgba(0, 0, 0, 0.14); }
+    .stickies-fab:active { filter: brightness(0.98); }
+    .stickies-fab:focus { outline: none; }
+    .stickies-fab:focus-visible { outline: 2px solid rgba(25, 118, 210, 0.5); outline-offset: 2px; }
+    .stickies-fab__bar { flex: 0 0 auto; height: 11px; min-height: 11px; background: rgba(0, 0, 0, 0.04); box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.08); }
+    .stickies-fab__scribble { flex: 1 1 auto; display: flex; flex-direction: column; align-items: flex-start; justify-content: center; gap: 4px; padding: 6px 7px 7px; min-height: 0; box-sizing: border-box; }
+    .stickies-fab__line { display: block; height: 2px; border-radius: 1px; background: rgba(62, 39, 35, 0.26); width: 100%; }
+    .stickies-fab__line--short { width: 58%; }
+    .stickies-placement-hint { position: fixed; left: 50%; bottom: 5.5rem; transform: translateX(-50%); z-index: 1055; pointer-events: none; font-size: 0.9rem; padding: 0.5rem 1rem; border-radius: 2rem; background: rgba(23, 32, 51, 0.92); color: #fff; box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15); text-align: center; white-space: pre-line; }
+    .sticky-note { --sticky-bar-size: 28px; position: absolute; display: flex; flex-direction: column; min-width: 120px; min-height: 80px; max-height: 480px; background: #fff59d; border: 1px solid #d6c56a; border-radius: 4px; box-shadow: 0 1px 4px rgba(0, 0, 0, 0.12); pointer-events: auto; overflow: hidden; touch-action: none; }
+    .sticky-note__header { flex: 0 0 auto; display: flex; flex-direction: row; align-items: center; gap: 3px; box-sizing: border-box; height: var(--sticky-bar-size); min-height: var(--sticky-bar-size); max-height: var(--sticky-bar-size); padding: 0 3px; position: relative; border-bottom: 0; box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.08); background: rgba(0, 0, 0, 0.04); border-radius: 3px 3px 0 0; }
+    .sticky-note__header-draghit { position: absolute; inset: 0; z-index: 0; cursor: grab; border-radius: inherit; }
+    .sticky-note__header-draghit:active { cursor: grabbing; }
+    .sticky-note--collapsed .sticky-note__header { flex: 1 1 auto; height: 100%; min-height: var(--sticky-bar-size); max-height: none; border-bottom: none; box-shadow: none; border-radius: 4px; justify-content: center; align-items: center; padding: 0; gap: 0; }
+    .sticky-note--collapsed .sticky-note__header-actions { position: relative; z-index: 1; flex: 1 1 auto; align-self: stretch; display: flex; align-items: center; justify-content: center; min-width: 0; min-height: 0; pointer-events: none; }
+    .sticky-note--collapsed .sticky-note__header-actions .sticky-icon-btn { pointer-events: auto; }
+    .sticky-header-btns { display: flex; flex-direction: row; align-items: center; gap: 4px; flex: 0 0 auto; }
+    .sticky-note--collapsed .sticky-header-btns--collapsed { flex: 1 1 auto; align-self: stretch; justify-content: center; width: 100%; min-width: 0; min-height: 0; gap: 0; }
+    .sticky-note__header-grip { flex: 1 1 auto; min-width: 1.25rem; min-height: 0; align-self: stretch; cursor: grab; user-select: none; touch-action: none; border-radius: 2px; }
+    .sticky-note__header-grip:active { cursor: grabbing; }
+    .sticky-note__header-grip:focus { outline: 2px solid rgba(25, 118, 210, 0.4); outline-offset: -1px; }
+    .sticky-note__header-actions { flex: 0 0 auto; display: flex; flex-direction: row; align-items: center; align-self: center; }
+    .sticky-note--collapsed { min-width: 0; min-height: 0; }
+    .sticky-note__sheet { display: flex; flex-direction: column; flex: 1 1 auto; min-height: 0; }
+    .sticky-icon-btn { position: relative; width: calc(var(--sticky-bar-size) - 8px); height: calc(var(--sticky-bar-size) - 8px); min-height: calc(var(--sticky-bar-size) - 8px); margin: 0; padding: 0; display: inline-flex; align-items: center; justify-content: center; line-height: 0; font-size: 0; border: 0; border-radius: 4px; overflow: hidden; cursor: pointer; appearance: none; -webkit-appearance: none; box-sizing: border-box; background-color: rgba(255, 255, 255, 0.45); color: #3e2723; box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08); }
+    .sticky-icon-btn:hover, .sticky-icon-btn:focus-visible { background-color: rgba(255, 255, 255, 0.85); color: #3e2723; }
+    .sticky-icon-btn:focus-visible { outline: 2px solid rgba(25, 118, 210, 0.45); outline-offset: 1px; }
+    .sticky-icon-btn:focus:not(:focus-visible) { outline: none; }
+    .sticky-icon-btn:active { background-color: rgba(255, 255, 255, 0.7); color: #3e2723; }
+    .sticky-icon-btn .sticky-symbol { position: absolute; left: 50%; top: 50%; width: 0; height: 0; pointer-events: none; }
+    .sticky-icon-btn .sticky-symbol::before, .sticky-icon-btn .sticky-symbol::after { content: ''; position: absolute; left: 0; top: 0; background: currentColor; }
+    .sticky-symbol--minus::before { width: 8px; height: 2px; transform: translate(-50%, -50%); }
+    .sticky-symbol--minus::after { display: none; }
+    .sticky-symbol--plus::before { width: 8px; height: 2px; transform: translate(-50%, -50%); }
+    .sticky-symbol--plus::after { width: 2px; height: 8px; transform: translate(-50%, -50%); }
+    .sticky-symbol--cross::before { width: 9px; height: 2px; transform: translate(-50%, -50%) rotate(45deg); }
+    .sticky-symbol--cross::after { width: 9px; height: 2px; transform: translate(-50%, -50%) rotate(-45deg); }
+    .sticky-note__textarea { flex: 1 1 auto; min-height: 0; width: 100%; margin: 0; padding: 0.5rem 1.5rem 1.35rem 0.5rem; border: 0; resize: none; background: transparent; color: #333; font-size: 0.95rem; line-height: 1.45; outline: none; overflow-y: auto; box-sizing: border-box; }
+    .sticky-note__textarea:focus { box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.12); }
+    .resize-handle { position: absolute; padding: 0; margin: 0; border: 0; background: transparent; opacity: 0; transition: opacity 0.12s ease; z-index: 3; }
+    .sticky-note:hover .resize-handle, .sticky-note:focus-within .resize-handle { opacity: 1; }
+    .resize-handle:hover, .resize-handle:focus { opacity: 1; outline: none; }
+    .resize-se { right: 0; bottom: 0; width: 22px; height: 22px; cursor: nwse-resize; display: flex; align-items: flex-end; justify-content: flex-end; padding: 0 2px 2px 0; box-sizing: border-box; color: rgba(0, 0, 0, 0.38); }
+    .resize-se:hover, .resize-se:focus { cursor: nwse-resize; color: rgba(0, 0, 0, 0.55); }
+    .resize-se__grips { display: block; flex-shrink: 0; pointer-events: none; }
+  </style>
+</head>
+<body class="bg-body">
+  <div id="snapp-scroll-root" class="container shell py-4 py-lg-5 snapp-scroll-root" x-data="app()">
+
+    <header class="mb-4">
+      <h1 class="h3 fw-bold mb-1 brand-title">Wabtec AI-Enabled Obsolescence Management</h1>
+      <p class="text-secondary mb-3">Three-layer value sensitivity model</p>
+
+      <div class="d-flex gap-2 scenario-toggle" style="max-width: 420px;">
+        <button class="btn btn-outline-secondary"
+                :class="{ 'active-scenario': scenario === 'bear' }"
+                @click="setScenario('bear')">Bear</button>
+        <button class="btn btn-outline-secondary"
+                :class="{ 'active-scenario': scenario === 'base' }"
+                @click="setScenario('base')">Base</button>
+        <button class="btn btn-outline-secondary"
+                :class="{ 'active-scenario': scenario === 'bull' }"
+                @click="setScenario('bull')">Bull</button>
+      </div>
+    </header>
+
+    <div class="row g-4">
+
+      <div class="col-lg-5">
+        <div class="card-panel">
+          <p class="section-label mb-3">Inputs</p>
+
+          <div class="layer-group">
+            <span class="layer-label l1">Layer 1 — Revenue Uplift</span>
+
+            <div class="input-row">
+              <div class="input-label">Freight services base ($B/yr)</div>
+              <div class="source">Wabtec Q1 2025 earnings, annualized</div>
+              <div class="input-line">
+                <input type="range" class="form-range" min="2.5" max="5.0" step="0.1" x-model.number="servBase">
+                <span class="val" x-text="'$' + servBase.toFixed(1) + 'B'"></span>
+              </div>
+            </div>
+
+            <div class="input-row">
+              <div class="input-label">Bookings uplift (%)</div>
+              <div class="source">Water OEM Demeter analogue, Commercial Acceleration deck</div>
+              <div class="input-line">
+                <input type="range" class="form-range" min="5" max="25" step="1" x-model.number="uplift">
+                <span class="val" x-text="uplift + '%'"></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="layer-group">
+            <span class="layer-label l2">Layer 2 — Margin Improvement</span>
+
+            <div class="input-row">
+              <div class="input-label">Service delivery COGS ($B/yr)</div>
+              <div class="source">~63% COGS ratio on freight services base</div>
+              <div class="input-line">
+                <input type="range" class="form-range" min="1.5" max="3.5" step="0.1" x-model.number="servCOGS">
+                <span class="val" x-text="'$' + servCOGS.toFixed(1) + 'B'"></span>
+              </div>
+            </div>
+
+            <div class="input-row">
+              <div class="input-label">Efficiency gain (%)</div>
+              <div class="source">Predictive scheduling, parts pre-staging, reduced rework</div>
+              <div class="input-line">
+                <input type="range" class="form-range" min="1" max="8" step="0.5" x-model.number="effGain">
+                <span class="val" x-text="effGain.toFixed(1) + '%'"></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="layer-group">
+            <span class="layer-label l3">Layer 3 — Customer Savings</span>
+
+            <div class="input-row">
+              <div class="input-label">Fleet size (locomotives)</div>
+              <div class="source">Wabtec corporate, installed base</div>
+              <div class="input-line">
+                <input type="range" class="form-range" min="15000" max="30000" step="500" x-model.number="fleet">
+                <span class="val" x-text="fleet.toLocaleString()"></span>
+              </div>
+            </div>
+
+            <div class="input-row">
+              <div class="input-label">Annual maintenance per unit ($K)</div>
+              <div class="source">DOE / CARB data, freight line-haul</div>
+              <div class="input-line">
+                <input type="range" class="form-range" min="75" max="200" step="5" x-model.number="maintUnit">
+                <span class="val" x-text="'$' + maintUnit + 'K'"></span>
+              </div>
+            </div>
+
+            <div class="input-row">
+              <div class="input-label">Maintenance spend reduction (%)</div>
+              <div class="source">McKinsey reliability slide (MVI Meeting Prep)</div>
+              <div class="input-line">
+                <input type="range" class="form-range" min="5" max="20" step="1" x-model.number="maintRed">
+                <span class="val" x-text="maintRed + '%'"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-7">
+        <div class="card-panel">
+          <p class="section-label mb-3">Outputs</p>
+
+          <div class="row g-3 mb-3">
+            <div class="col-sm-4">
+              <div class="kpi-tile l1">
+                <div class="kpi" x-text="fmt(l1())">$0M</div>
+                <div class="kpi-sub">Layer 1: Wabtec revenue</div>
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="kpi-tile l2">
+                <div class="kpi" x-text="fmt(l2())">$0M</div>
+                <div class="kpi-sub">Layer 2: Wabtec EBITDA</div>
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="kpi-tile l3">
+                <div class="kpi" x-text="fmt(l3())">$0M</div>
+                <div class="kpi-sub">Layer 3: Customer savings</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="kpi-tile total mb-3">
+            <div class="kpi" x-text="fmt(l1() + l2()) + '/yr'">$0M/yr</div>
+            <div class="kpi-sub">Combined Wabtec value (Layer 1 + Layer 2)</div>
+          </div>
+
+          <p class="summary-callout mb-3" x-text="summary()"></p>
+
+          <div class="footnote">
+            <strong>Sources and assumptions:</strong> Freight services base from Wabtec Q1 2025 earnings ($863M x 4). Bookings uplift from Water OEM Demeter case (Commercial Acceleration deck, 12-15%). Service COGS estimated at ~63% of services revenue (Wabtec adjusted gross margin ~37%, Q1 2026). Maintenance cost per unit from DOE/CARB analysis ($125K/yr freight line-haul). Maintenance spend reduction from McKinsey reliability use cases slide (MVI Meeting Prep, 10-15%). Fleet size from Wabtec corporate materials (~24,600 units). Layer 3 is not additive to Layers 1 and 2: it represents the customer value proposition that enables Layer 1 bookings.
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div
+    class="stickies-layer"
+    :class="{ 'placement-mode': placementMode, 'stickies-layer--fab-drag': dragPreviewActive }"
+    x-data="stickiesApp()"
+    @keydown.escape.window="onStickiesEscape()"
+    @click.window.capture="onWindowClickCapture($event)"
+  >
+    <p class="stickies-placement-hint m-0" x-show="placementMode || dragPreviewActive" x-cloak x-text="placementHint()"></p>
+    <div class="stickies-drop-preview" x-show="dragPreviewActive" x-cloak :style="'left:' + previewLeft + 'px;top:' + previewTop + 'px'" aria-hidden="true"></div>
+    <button type="button" class="stickies-fab" id="stickies-fab" :class="{ 'stickies-fab--armed': placementMode }" @pointerdown.stop="fabPointerDown($event)" @click.stop="fabClick()" aria-label="Add note: place on next click, drag onto the page, or Shift-click anywhere. Esc cancels." title="Add note">
+      <span class="stickies-fab__bar" aria-hidden="true"></span>
+      <span class="stickies-fab__scribble" aria-hidden="true">
+        <span class="stickies-fab__line"></span>
+        <span class="stickies-fab__line"></span>
+        <span class="stickies-fab__line stickies-fab__line--short"></span>
+      </span>
+    </button>
+    <template x-for="(note, idx) in notes" :key="note.id">
+      <div class="sticky-note" :class="{ 'sticky-note--collapsed': note.collapsed }" :id="'sticky-' + note.id" :style="'left:' + note.x + 'px;top:' + note.y + 'px;width:' + note.width + 'px;height:' + note.height + 'px;z-index:' + note.z" role="group" aria-label="Feedback note">
+        <div class="sticky-note__header">
+          <div class="sticky-note__header-draghit" x-show="note.collapsed" x-cloak aria-hidden="true" @pointerdown.stop="startMove(note, $event)"></div>
+          <div class="sticky-note__header-grip" x-show="!note.collapsed" x-cloak aria-label="Drag to move note" title="Drag to move" tabindex="0" @pointerdown.stop="startMove(note, $event)"></div>
+          <div class="sticky-note__header-actions">
+            <template x-if="!note.collapsed">
+              <div class="sticky-header-btns">
+                <button type="button" class="sticky-icon-btn" @click.stop="collapseNote(note)" aria-label="Hide note" title="Hide"><span class="sticky-symbol sticky-symbol--minus" aria-hidden="true"></span></button>
+                <button type="button" class="sticky-icon-btn" @click.stop="deleteNote(note)" aria-label="Delete note" title="Delete"><span class="sticky-symbol sticky-symbol--cross" aria-hidden="true"></span></button>
+              </div>
+            </template>
+            <template x-if="note.collapsed">
+              <div class="sticky-header-btns sticky-header-btns--collapsed">
+                <button type="button" class="sticky-icon-btn" @click.stop="expandNote(note)" aria-label="Expand note" title="Expand"><span class="sticky-symbol sticky-symbol--plus" aria-hidden="true"></span></button>
+              </div>
+            </template>
+          </div>
+        </div>
+        <div class="sticky-note__sheet" x-show="!note.collapsed">
+          <textarea class="sticky-note__textarea" x-model="note.text" @input="schedulePersistStickies()" @pointerdown.stop="bringToFront(note)" placeholder="Type feedback..." :aria-label="'Sticky note ' + (idx + 1)"></textarea>
+          <button type="button" class="resize-handle resize-se" aria-label="Resize note" title="Drag corner to resize" @pointerdown.stop.prevent="startResize(note, $event)">
+            <svg class="resize-se__grips" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><polyline points="3 9 3 3 9 3"/><polyline points="21 15 21 21 15 21"/></svg>
+          </button>
+        </div>
+      </div>
+    </template>
+  </div>
+
+  <script>
+    function app() {
+      var scenarios = {
+        bear: { servBase: 3.4, uplift: 6,  servCOGS: 2.1, effGain: 1.5, fleet: 24600, maintUnit: 125, maintRed: 6  },
+        base: { servBase: 3.4, uplift: 12, servCOGS: 2.1, effGain: 2.5, fleet: 24600, maintUnit: 125, maintRed: 10 },
+        bull: { servBase: 3.4, uplift: 18, servCOGS: 2.1, effGain: 4.5, fleet: 24600, maintUnit: 125, maintRed: 14 }
+      };
+      return {
+        scenario: 'base',
+        servBase: 3.4, uplift: 12, servCOGS: 2.1, effGain: 2.5, fleet: 24600, maintUnit: 125, maintRed: 10,
+        setScenario: function (s) {
+          this.scenario = s;
+          var p = scenarios[s];
+          this.servBase = p.servBase;
+          this.uplift = p.uplift;
+          this.servCOGS = p.servCOGS;
+          this.effGain = p.effGain;
+          this.fleet = p.fleet;
+          this.maintUnit = p.maintUnit;
+          this.maintRed = p.maintRed;
+        },
+        l1: function () { return this.servBase * 1000 * (this.uplift / 100); },
+        l2: function () { return this.servCOGS * 1000 * (this.effGain / 100); },
+        maintBase: function () { return this.fleet * this.maintUnit / 1000; },
+        l3: function () { return this.maintBase() * (this.maintRed / 100); },
+        fmt: function (n) {
+          if (Math.abs(n) >= 1000) return '$' + (n / 1000).toFixed(1) + 'B';
+          return '$' + Math.round(n) + 'M';
+        },
+        summary: function () {
+          var total = this.l1() + this.l2();
+          var label = this.scenario.charAt(0).toUpperCase() + this.scenario.slice(1);
+          return label + ' scenario: Layer 1 contributes ' + this.fmt(this.l1()) + '/yr in incremental Wabtec bookings, Layer 2 adds ' + this.fmt(this.l2()) + '/yr in margin improvement, totalling ' + this.fmt(total) + '/yr in combined Wabtec value. Customer maintenance savings of ' + this.fmt(this.l3()) + '/yr underwrite the Layer 1 demand case.';
+        }
+      };
+    }
+  </script>
+
+  <script>
+    var STICKY_MIN_W = 120;
+    var STICKY_MIN_H = 80;
+    var STICKY_MAX_H = 480;
+    var STICKY_DEFAULT_W = 220;
+    var STICKY_DEFAULT_H = 160;
+    var STICKY_BAR_PX = 28;
+    var STICKIES_STORAGE_KEY = 'snappy.stickies.v1:' + location.pathname;
+    var STICKIES_PLACEMENT_TIP = '\nTip: Shift+click anywhere on the page to add a note.';
+    var STICKIES_INITIAL_NEXT_Z = 10;
+    var STICKIES_RESIZE_CLAMP_MS = 120;
+    var STICKIES_PERSIST_DEBOUNCE_MS = 280;
+    var STICKIES_FAB_DRAG_THRESHOLD_PX = 6;
+    var STICKIES_NEW_NOTE_ORIGIN_OFFSET_PX = 4;
+    var STICKIES_NEW_NOTE_EDGE_MARGIN_PX = 8;
+    var STICKIES_NOTE_ID_RANDOM_RANGE = 10000;
+
+    function clearStickiesStorageKey() { try { localStorage.removeItem(STICKIES_STORAGE_KEY); } catch (_) {} }
+    function armSkipNextFabClick(self) { self._skipNextFabClick = true; setTimeout(function () { self._skipNextFabClick = false; }, 0); }
+    function isStickiesOverlayTarget(el) {
+      if (!el || !el.closest) return false;
+      return !!(el.closest('#stickies-fab') || el.closest('.sticky-note') || el.closest('.stickies-placement-hint'));
+    }
+    function trackPointerDrag(opts) {
+      var captureEl = opts.captureEl, pointerId = opts.pointerId, cursor = opts.cursor, onMove = opts.onMove, onEnd = opts.onEnd;
+      try { captureEl.setPointerCapture(pointerId); } catch (_) {}
+      if (cursor) document.body.style.cursor = cursor;
+      function done() { document.body.style.cursor = ''; window.removeEventListener('pointermove', onMove); window.removeEventListener('pointerup', up); window.removeEventListener('pointercancel', up); try { captureEl.releasePointerCapture(pointerId); } catch (_) {} onEnd(); }
+      function up(ev) { if (ev.pointerId != null && ev.pointerId !== pointerId) return; done(); }
+      window.addEventListener('pointermove', onMove); window.addEventListener('pointerup', up); window.addEventListener('pointercancel', up);
+    }
+    function normalizeStickyNote(raw) {
+      if (!raw || typeof raw.id !== 'string') return null;
+      var x = Number(raw.x), y = Number(raw.y), w = Number(raw.width), h = Number(raw.height), z = Number(raw.z);
+      if (!isFinite(x) || !isFinite(y) || !isFinite(w) || !isFinite(h) || !isFinite(z)) return null;
+      var text = typeof raw.text === 'string' ? raw.text : '';
+      var collapsed = !!raw.collapsed;
+      var note = { id: raw.id, x: x, y: y, width: w, height: h, text: text, z: z, collapsed: collapsed };
+      if (collapsed) {
+        note.width = STICKY_BAR_PX; note.height = STICKY_BAR_PX;
+        if (raw._savedW != null && isFinite(Number(raw._savedW))) note._savedW = Number(raw._savedW);
+        if (raw._savedH != null && isFinite(Number(raw._savedH))) note._savedH = Number(raw._savedH);
+      } else {
+        note.width = Math.max(STICKY_MIN_W, w);
+        note.height = Math.max(STICKY_MIN_H, Math.min(STICKY_MAX_H, h));
+      }
+      return note;
+    }
+    function loadStickiesFromStorage() {
+      try {
+        var raw = localStorage.getItem(STICKIES_STORAGE_KEY); if (!raw) return null;
+        var data; try { data = JSON.parse(raw); } catch (e) { clearStickiesStorageKey(); return null; }
+        if (!data || !Array.isArray(data.notes)) { clearStickiesStorageKey(); return null; }
+        var notes = []; for (var i = 0; i < data.notes.length; i++) { var n = normalizeStickyNote(data.notes[i]); if (n) notes.push(n); }
+        var nextZ = typeof data.nextZ === 'number' && isFinite(data.nextZ) ? data.nextZ : STICKIES_INITIAL_NEXT_Z;
+        var maxZ = 0; for (var j = 0; j < notes.length; j++) { if (notes[j].z > maxZ) maxZ = notes[j].z; }
+        nextZ = Math.max(nextZ, maxZ + 1);
+        return { notes: notes, nextZ: nextZ };
+      } catch (e) { return null; }
+    }
+    function stickiesApp() {
+      return {
+        placementMode: false, dragPreviewActive: false, previewLeft: 0, previewTop: 0,
+        notes: [], nextZ: STICKIES_INITIAL_NEXT_Z,
+        _resizeDrag: null, _moveDrag: null, _skipNextFabClick: false, _fabPointerCleanup: null, _persistTimer: null, _resizeClampTimer: null, _stickiesRootEl: null,
+        init: function () {
+          this._stickiesRootEl = document.body;
+          var loaded = loadStickiesFromStorage();
+          if (loaded) { this.notes = loaded.notes; this.nextZ = loaded.nextZ; for (var i = 0; i < this.notes.length; i++) this.clampNotePosition(this.notes[i]); }
+          var self = this;
+          window.addEventListener('beforeunload', function () { self.flushPersistStickies(); });
+          window.addEventListener('resize', function () { if (self._resizeClampTimer) clearTimeout(self._resizeClampTimer); self._resizeClampTimer = setTimeout(function () { self._resizeClampTimer = null; for (var j = 0; j < self.notes.length; j++) self.clampNotePosition(self.notes[j]); self.persistStickies(); }, STICKIES_RESIZE_CLAMP_MS); });
+        },
+        persistStickies: function () {
+          try {
+            var notes = this.notes.map(function (n) { var o = { id: n.id, x: n.x, y: n.y, width: n.width, height: n.height, text: typeof n.text === 'string' ? n.text : '', z: n.z, collapsed: !!n.collapsed }; if (n.collapsed) { if (n._savedW != null) o._savedW = n._savedW; if (n._savedH != null) o._savedH = n._savedH; } return o; });
+            localStorage.setItem(STICKIES_STORAGE_KEY, JSON.stringify({ notes: notes, nextZ: this.nextZ }));
+          } catch (err) { if (typeof console !== 'undefined' && console.warn) console.warn('Stickies save failed', err); }
+        },
+        schedulePersistStickies: function () { var self = this; if (self._persistTimer) clearTimeout(self._persistTimer); self._persistTimer = setTimeout(function () { self._persistTimer = null; self.persistStickies(); }, STICKIES_PERSIST_DEBOUNCE_MS); },
+        flushPersistStickies: function () { if (this._persistTimer) { clearTimeout(this._persistTimer); this._persistTimer = null; } this.persistStickies(); },
+        stickiesRoot: function () { return this._stickiesRootEl; },
+        rootBounds: function () {
+          var root = this.stickiesRoot();
+          if (!root) return { width: window.innerWidth, height: window.innerHeight };
+          if (root === document.body) {
+            var w = document.documentElement.clientWidth || root.clientWidth || window.innerWidth;
+            var h = Math.max(document.documentElement.scrollHeight || 0, document.body.scrollHeight || 0, root.scrollHeight || 0, window.innerHeight);
+            return { width: w, height: h };
+          }
+          return { width: root.clientWidth, height: root.clientHeight };
+        },
+        clientPointToLayerXY: function (clientX, clientY) { var root = this.stickiesRoot(); if (!root) return { x: clientX, y: clientY }; var r = root.getBoundingClientRect(); return { x: clientX - r.left, y: clientY - r.top }; },
+        layerPointToViewportXY: function (layerX, layerY) { var root = this.stickiesRoot(); if (!root) return { x: layerX, y: layerY }; var r = root.getBoundingClientRect(); return { x: r.left + layerX, y: r.top + layerY }; },
+        placementHint: function () { if (this.dragPreviewActive) return 'Release the mouse to drop the note here. Esc to cancel.' + STICKIES_PLACEMENT_TIP; if (this.placementMode) return 'Click where you want the note. Esc to cancel.' + STICKIES_PLACEMENT_TIP; return ''; },
+        onStickiesEscape: function () { if (!this.placementMode && !this.dragPreviewActive && !this._fabPointerCleanup) return; this.cancelPlacement(); },
+        togglePlacement: function () { this.placementMode = !this.placementMode; },
+        cancelPlacement: function () { if (this._fabPointerCleanup) this._fabPointerCleanup(); this.placementMode = false; this.dragPreviewActive = false; },
+        fabClick: function () { if (this._skipNextFabClick) { this._skipNextFabClick = false; return; } this.togglePlacement(); },
+        fabPointerDown: function (e) {
+          if (e.button !== 0 && e.button != null) return;
+          var self = this;
+          if (this._fabPointerCleanup) this._fabPointerCleanup();
+          var fab = e.currentTarget, pid = e.pointerId, sx = e.clientX, sy = e.clientY, moved = false;
+          try { fab.setPointerCapture(pid); } catch (_) {}
+          function cleanupOnly() { window.removeEventListener('pointermove', onMove); window.removeEventListener('pointerup', onUp); window.removeEventListener('pointercancel', onUp); try { fab.releasePointerCapture(pid); } catch (_) {} self._fabPointerCleanup = null; }
+          this._fabPointerCleanup = cleanupOnly;
+          function onMove(ev) {
+            if (ev.pointerId !== pid) return;
+            var dx = ev.clientX - sx, dy = ev.clientY - sy, dragThresh = STICKIES_FAB_DRAG_THRESHOLD_PX;
+            if (!moved && (dx * dx + dy * dy > dragThresh * dragThresh)) { moved = true; self.placementMode = false; self.dragPreviewActive = true; }
+            if (moved) { var pos = self.clampNewNoteOrigin(ev.clientX, ev.clientY); var vp = self.layerPointToViewportXY(pos.x, pos.y); self.previewLeft = vp.x; self.previewTop = vp.y; }
+          }
+          function onUp(ev) { if (ev.pointerId !== pid) return; cleanupOnly(); if (moved) { self.addNoteAt(ev.clientX, ev.clientY); self.dragPreviewActive = false; armSkipNextFabClick(self); } }
+          window.addEventListener('pointermove', onMove); window.addEventListener('pointerup', onUp); window.addEventListener('pointercancel', onUp);
+        },
+        clampNewNoteOrigin: function (cx, cy) {
+          var p = this.clientPointToLayerXY(cx, cy), off = STICKIES_NEW_NOTE_ORIGIN_OFFSET_PX, m = STICKIES_NEW_NOTE_EDGE_MARGIN_PX;
+          var x = p.x - off, y = p.y - off;
+          var b = this.rootBounds();
+          x = Math.max(m, Math.min(x, b.width - STICKY_MIN_W - m));
+          y = Math.max(m, Math.min(y, b.height - STICKY_MIN_H - m));
+          return { x: x, y: y };
+        },
+        onWindowClickCapture: function (e) {
+          var t = e.target;
+          if (e.shiftKey && (e.button === 0 || e.button === undefined)) {
+            if (isStickiesOverlayTarget(t)) return;
+            if (t && t.closest && t.closest('a[href]')) return;
+            var tag = t && t.tagName;
+            if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT' || tag === 'BUTTON') return;
+            this.addNoteAt(e.clientX, e.clientY); this.placementMode = false; e.preventDefault(); e.stopPropagation(); return;
+          }
+          if (!this.placementMode) return;
+          if (isStickiesOverlayTarget(t)) return;
+          this.addNoteAt(e.clientX, e.clientY); this.placementMode = false; e.preventDefault(); e.stopPropagation();
+        },
+        addNoteAt: function (cx, cy) {
+          if (this._fabPointerCleanup) this._fabPointerCleanup();
+          this.dragPreviewActive = false;
+          var id = 'n' + Date.now() + '_' + Math.floor(Math.random() * STICKIES_NOTE_ID_RANDOM_RANGE);
+          var o = this.clampNewNoteOrigin(cx, cy);
+          this.nextZ += 1;
+          this.notes.push({ id: id, x: o.x, y: o.y, width: STICKY_DEFAULT_W, height: STICKY_DEFAULT_H, text: '', z: this.nextZ, collapsed: false });
+          var self = this;
+          this.$nextTick(function () { var el = document.getElementById('sticky-' + id); var ta = el && el.querySelector('textarea'); if (ta) ta.focus(); });
+          this.persistStickies();
+        },
+        bringToFront: function (note) { this.nextZ += 1; note.z = this.nextZ; this.persistStickies(); },
+        collapseNote: function (note) { if (note.collapsed) return; note._savedW = note.width; note._savedH = note.height; note.collapsed = true; note.width = STICKY_BAR_PX; note.height = STICKY_BAR_PX; this.clampNotePosition(note); this.persistStickies(); },
+        expandNote: function (note) { if (!note.collapsed) return; note.collapsed = false; note.width = Math.max(STICKY_MIN_W, note._savedW || STICKY_DEFAULT_W); note.height = Math.max(STICKY_MIN_H, note._savedH || STICKY_DEFAULT_H); this.clampNotePosition(note); this.persistStickies(); },
+        deleteNote: function (note) { this.notes = this.notes.filter(function (n) { return n.id !== note.id; }); this.persistStickies(); },
+        clampNotePosition: function (note) { var b = this.rootBounds(); var maxX = Math.max(0, b.width - note.width); var maxY = Math.max(0, b.height - note.height); note.x = Math.max(0, Math.min(maxX, note.x)); note.y = Math.max(0, Math.min(maxY, note.y)); },
+        startMove: function (note, e) {
+          if (e.button != null && e.button !== 0) return;
+          e.stopPropagation(); this.bringToFront(note);
+          var el = e.currentTarget, pid = e.pointerId, self = this;
+          this._moveDrag = { note: note, startX: e.clientX, startY: e.clientY, origX: note.x, origY: note.y };
+          trackPointerDrag({ captureEl: el, pointerId: pid, cursor: 'grabbing',
+            onMove: function (ev) { var d = self._moveDrag; if (!d || d.note !== note) return; note.x = d.origX + (ev.clientX - d.startX); note.y = d.origY + (ev.clientY - d.startY); self.clampNotePosition(note); },
+            onEnd: function () { self._moveDrag = null; self.persistStickies(); }
+          });
+        },
+        startResize: function (note, e) {
+          if (note.collapsed) return;
+          e.stopPropagation(); this.bringToFront(note);
+          var el = e.currentTarget, pid = e.pointerId, self = this;
+          this._resizeDrag = { note: note, startX: e.clientX, startY: e.clientY, startW: note.width, startH: note.height };
+          trackPointerDrag({ captureEl: el, pointerId: pid, cursor: 'nwse-resize',
+            onMove: function (ev) { var d = self._resizeDrag; if (!d || d.note !== note) return; var dx = ev.clientX - d.startX, dy = ev.clientY - d.startY; var maxW = self.rootBounds().width - note.x - STICKIES_NEW_NOTE_EDGE_MARGIN_PX; note.width = Math.max(STICKY_MIN_W, Math.min(maxW, d.startW + dx)); note.height = Math.max(STICKY_MIN_H, Math.min(STICKY_MAX_H, d.startH + dy)); },
+            onEnd: function () { self._resizeDrag = null; self.clampNotePosition(note); self.persistStickies(); }
+          });
+        }
+      };
+    }
+  </script>
+</body>
+</html>
