@@ -363,10 +363,9 @@
 
             <div class="input-row">
               <div class="input-label">Freight services base ($B/yr)</div>
-              <div class="source">Wabtec Q1 2026 earnings (Apr 22, 2026) — services down 17.3% YoY; EVO ramp now beginning</div>
-              <div class="input-line">
-                <input type="range" class="form-range" min="2.5" max="5.0" step="0.1" x-model.number="servBase">
-                <span class="val" x-text="'$' + servBase.toFixed(1) + 'B'"></span>
+              <div class="source">Fixed at Q1 2025 run-rate — $3.4B pre-EVO-ramp baseline (Wabtec investor disclosures)</div>
+              <div class="input-line" style="justify-content:flex-end;">
+                <span class="val">$3.4B</span>
               </div>
             </div>
 
@@ -385,10 +384,9 @@
 
             <div class="input-row">
               <div class="input-label">Service delivery COGS ($B/yr)</div>
-              <div class="source">~64% COGS ratio; Q1 2026 GAAP gross margin 36.0% (Wabtec Q1 2026 earnings)</div>
-              <div class="input-line">
-                <input type="range" class="form-range" min="1.5" max="3.5" step="0.1" x-model.number="servCOGS">
-                <span class="val" x-text="'$' + servCOGS.toFixed(1) + 'B'"></span>
+              <div class="source">Fixed at ~64% COGS ratio on $3.4B base; Q1 2026 GAAP gross margin 36.0%</div>
+              <div class="input-line" style="justify-content:flex-end;">
+                <span class="val">$2.1B</span>
               </div>
             </div>
 
@@ -440,28 +438,22 @@
           <p class="section-label mb-3">Outputs</p>
 
           <div class="row g-2 mb-3">
-            <div class="col-6 col-sm-3">
+            <div class="col-4">
               <div class="kpi-tile kpi-tile-sm l1">
                 <div class="kpi" x-text="fmt(l1())">$0M</div>
-                <div class="kpi-sub">L1: Revenue</div>
+                <div class="kpi-sub">Revenue uplift</div>
               </div>
             </div>
-            <div class="col-6 col-sm-3">
+            <div class="col-4">
               <div class="kpi-tile kpi-tile-sm l2">
                 <div class="kpi" x-text="fmt(l2())">$0M</div>
-                <div class="kpi-sub">L2: EBITDA</div>
+                <div class="kpi-sub">COGS savings</div>
               </div>
             </div>
-            <div class="col-6 col-sm-3">
+            <div class="col-4">
               <div class="kpi-tile kpi-tile-sm l3">
                 <div class="kpi" x-text="fmt(l3())">$0M</div>
                 <div class="kpi-sub">L3: Cust. savings</div>
-              </div>
-            </div>
-            <div class="col-6 col-sm-3">
-              <div class="kpi-tile kpi-tile-sm total-small">
-                <div class="kpi" x-text="fmt(l1() + l2())">$0M</div>
-                <div class="kpi-sub">Combined L1+L2</div>
               </div>
             </div>
           </div>
@@ -475,12 +467,12 @@
               <rect x="70"  :y="160 - barH(l1())" width="60" :height="barH(l1())" fill="#C8102E" rx="2"/>
               <text x="100" :y="160 - barH(l1()) - 6" text-anchor="middle" font-size="13" font-weight="700" fill="#C8102E" x-text="fmt(l1())"></text>
               <text x="100" y="178" text-anchor="middle" font-size="11" font-weight="600" fill="#444">Layer 1</text>
-              <text x="100" y="194" text-anchor="middle" font-size="9.5" fill="#888">Wabtec revenue</text>
+              <text x="100" y="194" text-anchor="middle" font-size="9.5" fill="#888">Revenue uplift</text>
 
               <rect x="160" :y="160 - barH(l2())" width="60" :height="barH(l2())" fill="#1a1a1a" rx="2"/>
               <text x="190" :y="160 - barH(l2()) - 6" text-anchor="middle" font-size="13" font-weight="700" fill="#1a1a1a" x-text="fmt(l2())"></text>
               <text x="190" y="178" text-anchor="middle" font-size="11" font-weight="600" fill="#444">Layer 2</text>
-              <text x="190" y="194" text-anchor="middle" font-size="9.5" fill="#888">Wabtec EBITDA</text>
+              <text x="190" y="194" text-anchor="middle" font-size="9.5" fill="#888">COGS savings</text>
 
               <rect x="250" :y="160 - barH(l3())" width="60" :height="barH(l3())" fill="#6b7280" rx="2"/>
               <text x="280" :y="160 - barH(l3()) - 6" text-anchor="middle" font-size="13" font-weight="700" fill="#6b7280" x-text="fmt(l3())"></text>
@@ -608,8 +600,8 @@
 
       <div class="card-panel mb-4">
         <p class="section-label mb-3">Calculation Logic</p>
-        <div class="calc-row"><strong>Layer 1 (Wabtec revenue)</strong> = Freight services base &times; Bookings uplift %</div>
-        <div class="calc-row"><strong>Layer 2 (Wabtec EBITDA)</strong> = Service delivery COGS &times; Efficiency gain %</div>
+        <div class="calc-row"><strong>Layer 1 (Revenue uplift)</strong> = Freight services base ($3.4B fixed) &times; Bookings uplift %</div>
+        <div class="calc-row"><strong>Layer 2 (COGS savings)</strong> = Service delivery COGS ($2.1B fixed) &times; Efficiency gain %</div>
         <div class="calc-row"><strong>Layer 3 (Customer savings)</strong> = Fleet size &times; Annual maintenance per unit &times; Reduction %</div>
         <div class="calc-row combined"><strong>Combined Wabtec value</strong> = Layer 1 + Layer 2 (Layer 3 is NOT additive)</div>
         <p class="footnote mt-3 mb-2">
@@ -686,9 +678,9 @@
   <script>
     function app() {
       var scenarios = {
-        bear: { servBase: 2.9, uplift: 6,  servCOGS: 1.9, effGain: 1.5, fleet: 24600, maintUnit: 125, maintRed: 6  },
+        bear: { servBase: 3.4, uplift: 6,  servCOGS: 2.1, effGain: 1.5, fleet: 24600, maintUnit: 125, maintRed: 6  },
         base: { servBase: 3.4, uplift: 15, servCOGS: 2.1, effGain: 2.5, fleet: 24600, maintUnit: 125, maintRed: 10 },
-        bull: { servBase: 3.4, uplift: 22, servCOGS: 2.2, effGain: 4.5, fleet: 24600, maintUnit: 125, maintRed: 14 }
+        bull: { servBase: 3.4, uplift: 22, servCOGS: 2.1, effGain: 4.5, fleet: 24600, maintUnit: 125, maintRed: 14 }
       };
       return {
         tab: 'dashboard',
