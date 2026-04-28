@@ -687,13 +687,13 @@
     function app() {
       var scenarios = {
         bear: { servBase: 2.9, uplift: 6,  servCOGS: 1.9, effGain: 1.5, fleet: 24600, maintUnit: 125, maintRed: 6  },
-        base: { servBase: 2.9, uplift: 15, servCOGS: 1.9, effGain: 2.5, fleet: 24600, maintUnit: 125, maintRed: 10 },
+        base: { servBase: 3.4, uplift: 15, servCOGS: 2.1, effGain: 2.5, fleet: 24600, maintUnit: 125, maintRed: 10 },
         bull: { servBase: 3.4, uplift: 22, servCOGS: 2.2, effGain: 4.5, fleet: 24600, maintUnit: 125, maintRed: 14 }
       };
       return {
         tab: 'dashboard',
         scenario: 'base',
-        servBase: 2.9, uplift: 15, servCOGS: 1.9, effGain: 2.5, fleet: 24600, maintUnit: 125, maintRed: 10,
+        servBase: 3.4, uplift: 15, servCOGS: 2.1, effGain: 2.5, fleet: 24600, maintUnit: 125, maintRed: 10,
         setScenario: function (s) {
           this.scenario = s;
           var p = scenarios[s];
