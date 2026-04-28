@@ -363,7 +363,7 @@
 
             <div class="input-row">
               <div class="input-label">Freight services base ($B/yr)</div>
-              <div class="source">Wabtec Q1 2025 earnings, annualized</div>
+              <div class="source">Wabtec Q1 2026 earnings (Apr 22, 2026) — services down 17.3% YoY; EVO ramp now beginning</div>
               <div class="input-line">
                 <input type="range" class="form-range" min="2.5" max="5.0" step="0.1" x-model.number="servBase">
                 <span class="val" x-text="'$' + servBase.toFixed(1) + 'B'"></span>
@@ -372,7 +372,7 @@
 
             <div class="input-row">
               <div class="input-label">Bookings uplift (%)</div>
-              <div class="source">Water OEM Demeter analogue, Commercial Acceleration deck</div>
+              <div class="source">Water OEM Demeter analogue; CEO cited obsolescence as Q1 2026 upside driver</div>
               <div class="input-line">
                 <input type="range" class="form-range" min="5" max="25" step="1" x-model.number="uplift">
                 <span class="val" x-text="uplift + '%'"></span>
@@ -385,7 +385,7 @@
 
             <div class="input-row">
               <div class="input-label">Service delivery COGS ($B/yr)</div>
-              <div class="source">~63% COGS ratio on freight services base</div>
+              <div class="source">~64% COGS ratio; Q1 2026 GAAP gross margin 36.0% (Wabtec Q1 2026 earnings)</div>
               <div class="input-line">
                 <input type="range" class="form-range" min="1.5" max="3.5" step="0.1" x-model.number="servCOGS">
                 <span class="val" x-text="'$' + servCOGS.toFixed(1) + 'B'"></span>
@@ -503,9 +503,12 @@
     <div x-show="tab === 'sources'" x-cloak>
       <div class="card-panel mb-4">
         <p class="section-label mb-2">Methodology</p>
-        <p style="font-size: 0.9rem; line-height: 1.6; color: #374151; margin-bottom: 0;">
-          This model translates AI-enabled obsolescence management into three layers of value: revenue Wabtec captures from incremental bookings (Layer 1), margin Wabtec captures from service delivery efficiency (Layer 2), and savings the customer captures from reduced maintenance spend (Layer 3, the demand driver). Each input is sourced from public Wabtec disclosures, McKinsey internal artifacts, or industry analogues. Defaults represent a conservative base case. Ranges allow stress-testing for Bull and Bear scenarios.
+        <p style="font-size: 0.9rem; line-height: 1.6; color: #374151; margin-bottom: 0.75rem;">
+          This model translates AI-enabled obsolescence management into three layers of value: revenue Wabtec captures from incremental bookings (Layer 1), margin Wabtec captures from service delivery efficiency (Layer 2), and savings the customer captures from reduced maintenance spend (Layer 3, the demand driver). Each input is sourced from public Wabtec disclosures, McKinsey internal artifacts, or industry analogues. Defaults are anchored to Q1 2026 actuals. Ranges allow stress-testing for Bull and Bear scenarios.
         </p>
+        <div style="background:#fff8f8;border-left:3px solid #C8102E;padding:0.7rem 1rem;border-radius:0.25rem;font-size:0.83rem;color:#374151;line-height:1.55;">
+          <strong style="color:#C8102E;">CEO on Q1 2026 earnings call (Apr 22, 2026):</strong> "I'll probably start with obsolescence because that can drive, I think, some upside for us in terms of the opportunity to continue to modernize subsystems for our customers." — Rafael Santana, President &amp; CEO, Wabtec
+        </div>
       </div>
 
       <span class="layer-banner l1">Layer 1: Revenue Uplift</span>
@@ -513,24 +516,24 @@
       <div class="source-card l1">
         <div class="source-head">
           <span class="source-name">Freight services base ($B/yr)</span>
-          <span class="source-default">Default: $3.4B &middot; Range: $2.5 - $5.0B</span>
+          <span class="source-default">Default: $2.9B &middot; Range: $2.5 - $5.0B</span>
         </div>
         <div class="source-meta">
-          <div class="meta-row"><dt>Source:</dt><dd>Wabtec Q1 2025 earnings release, freight services segment, annualized.</dd></div>
-          <div class="meta-row"><dt>Calculation:</dt><dd>Q1 2025 freight services revenue of approximately $863M, multiplied by 4 quarters, yields a $3.4B annualized base.</dd></div>
-          <div class="meta-row"><dt>Range rationale:</dt><dd>$2.5B floor reflects the Bear case if service revenue contracts with declining new-build orders. $5.0B ceiling reflects the Bull case incorporating EVO modernization revenue ramp through 2027 and international expansion.</dd></div>
+          <div class="meta-row"><dt>Source:</dt><dd>Wabtec Q1 2026 earnings call (Apr 22, 2026). Services product line sales were down 17.3% YoY in Q1 2026 due to lower modernization deliveries, reflecting EVO ramp timing. Annualized from Q1 2025 base of $863M/quarter adjusted for the 17.3% decline yields approximately $2.86B, rounded to $2.9B.</dd></div>
+          <div class="meta-row"><dt>Key context:</dt><dd>Wabtec executed its first EVO modernization commercial build in Q1 2026, marking the transition from development to commercialization. Management noted lower modernization deliveries were "as expected" and the pipeline remains strong. Q2 2026 guidance also projects lower YoY services revenues due to modernization delivery timing.</dd></div>
+          <div class="meta-row"><dt>Range rationale:</dt><dd>$2.5B Bear reflects continued delivery timing headwinds. $3.4B Base Bull reflects full EVO ramp beginning to convert pipeline — Wabtec's $25.18B freight multiyear backlog (up 41% YoY) supports this ceiling. Bull scenario uses $3.4B to reflect full pipeline conversion.</dd></div>
         </div>
       </div>
 
       <div class="source-card l1">
         <div class="source-head">
           <span class="source-name">Bookings uplift (%)</span>
-          <span class="source-default">Default: 12% &middot; Range: 5 - 25%</span>
+          <span class="source-default">Default: 15% &middot; Range: 5 - 25%</span>
         </div>
         <div class="source-meta">
-          <div class="meta-row"><dt>Source:</dt><dd>Water Services OEM Demeter platform deployment (McKinsey internal), referenced in 20260327 Wabtec-McK Commercial Acceleration_vS.pdf.</dd></div>
-          <div class="meta-row"><dt>Benchmark:</dt><dd>Water OEM achieved 12 - 15% bookings uplift from AI-driven lead translation: shifting from reactive inbound RFQs to proactive, prioritized commercial pipelines.</dd></div>
-          <div class="meta-row"><dt>Range rationale:</dt><dd>5% Bear reflects slow adoption with limited account manager engagement. 25% Bull reflects mature deployment combined with predictive obsolescence detection at scale across the EVO-tier 10,000 locomotives.</dd></div>
+          <div class="meta-row"><dt>Source:</dt><dd>Water Services OEM Demeter platform deployment (McKinsey internal), referenced in 20260327 Wabtec-McK Commercial Acceleration_vS.pdf. CEO commentary from Q1 2026 earnings call (Apr 22, 2026).</dd></div>
+          <div class="meta-row"><dt>Benchmark:</dt><dd>Water OEM achieved 12-15% bookings uplift from AI-driven lead translation. Default raised to 15% from prior 12% following Wabtec CEO Rafael Santana's direct identification of obsolescence as a near-term upside driver: "obsolescence can drive upside for us in terms of the opportunity to continue to modernize subsystems for our customers" (Q1 2026 call).</dd></div>
+          <div class="meta-row"><dt>Range rationale:</dt><dd>5% Bear reflects slow adoption or limited account manager engagement. 25% Bull reflects mature AI deployment across the EVO-tier 10,000 locomotives, consistent with Wabtec's $210M MBTA modernization win and multibillion-dollar mining order secured in Q1 2026 as evidence of commercial execution capability.</dd></div>
         </div>
       </div>
 
@@ -539,12 +542,12 @@
       <div class="source-card l2">
         <div class="source-head">
           <span class="source-name">Service delivery COGS ($B/yr)</span>
-          <span class="source-default">Default: $2.1B &middot; Range: $1.5 - $3.5B</span>
+          <span class="source-default">Default: $1.9B &middot; Range: $1.5 - $3.5B</span>
         </div>
         <div class="source-meta">
-          <div class="meta-row"><dt>Source:</dt><dd>Derived from Wabtec adjusted gross margin disclosed in MVI Agent_Wabtec CEO Meeting Prep 032326.pdf.</dd></div>
-          <div class="meta-row"><dt>Calculation:</dt><dd>Wabtec Q1 2026 adjusted gross margin of approximately 37% implies a COGS ratio of 63%. Applied to the $3.4B services base, this yields about $2.1B in annual service delivery COGS.</dd></div>
-          <div class="meta-row"><dt>Range rationale:</dt><dd>Bear reflects more efficient existing operations (lower addressable COGS pool). Bull reflects margin compression scenarios where reactive sourcing and emergency parts purchases inflate the addressable COGS base.</dd></div>
+          <div class="meta-row"><dt>Source:</dt><dd>Wabtec Q1 2026 earnings call (Apr 22, 2026). GAAP gross margin was 36.0% in Q1 2026, up 1.5 percentage points YoY. Adjusted gross margin was up 2.3 percentage points.</dd></div>
+          <div class="meta-row"><dt>Calculation:</dt><dd>GAAP gross margin of 36.0% implies a COGS ratio of 64%. Applied to the updated $2.9B services base, this yields approximately $1.86B in annual service delivery COGS, rounded to $1.9B. Prior model used $2.1B against the $3.4B Q1 2025 base.</dd></div>
+          <div class="meta-row"><dt>Range rationale:</dt><dd>$1.5B Bear reflects EVO-down scenario with lower absolute revenue base. $3.5B Bull reflects full pipeline conversion at the $3.4B+ services base with mix shift toward higher-COGS modernization projects. Adjusted freight operating margin was 26.0% in Q1 2026 (up 0.3pp), confirming margin expansion trend.</dd></div>
         </div>
       </div>
 
@@ -612,8 +615,8 @@
       <div class="card-panel">
         <p class="section-label mb-3">Source Documents</p>
         <ul class="doc-list">
-          <li>Wabtec Q1 2025 earnings release (investor relations, public)</li>
-          <li>Wabtec Q1 2026 earnings release and management commentary (public)</li>
+          <li><strong>Wabtec Q1 2026 Earnings Call transcript (Apr 22, 2026)</strong> — primary source for updated defaults. Key data: $2.95B total Q1 sales (+13% YoY), services down 17.3%, GAAP gross margin 36.0%, freight adj. operating margin 26.0%, 12-mo backlog $6.68B, multiyear backlog $25.18B freight / $30B+ total, first EVO commercial build completed, CEO named obsolescence as near-term upside driver (public)</li>
+          <li>Wabtec Q1 2025 earnings release — used for prior-year services base of ~$863M/quarter (investor relations, public)</li>
           <li>20260327 Wabtec-McK Commercial Acceleration_vS.pdf (McKinsey internal)</li>
           <li>MVI Agent_Wabtec CEO Meeting Prep 032326.pdf (McKinsey internal)</li>
           <li>2025 B2B Services Growth Updated CXO vF.pptx (McKinsey internal)</li>
@@ -675,14 +678,14 @@
   <script>
     function app() {
       var scenarios = {
-        bear: { servBase: 3.4, uplift: 6,  servCOGS: 2.1, effGain: 1.5, fleet: 24600, maintUnit: 125, maintRed: 6  },
-        base: { servBase: 3.4, uplift: 12, servCOGS: 2.1, effGain: 2.5, fleet: 24600, maintUnit: 125, maintRed: 10 },
-        bull: { servBase: 3.4, uplift: 18, servCOGS: 2.1, effGain: 4.5, fleet: 24600, maintUnit: 125, maintRed: 14 }
+        bear: { servBase: 2.9, uplift: 6,  servCOGS: 1.9, effGain: 1.5, fleet: 24600, maintUnit: 125, maintRed: 6  },
+        base: { servBase: 2.9, uplift: 15, servCOGS: 1.9, effGain: 2.5, fleet: 24600, maintUnit: 125, maintRed: 10 },
+        bull: { servBase: 3.4, uplift: 22, servCOGS: 2.2, effGain: 4.5, fleet: 24600, maintUnit: 125, maintRed: 14 }
       };
       return {
         tab: 'dashboard',
         scenario: 'base',
-        servBase: 3.4, uplift: 12, servCOGS: 2.1, effGain: 2.5, fleet: 24600, maintUnit: 125, maintRed: 10,
+        servBase: 2.9, uplift: 15, servCOGS: 1.9, effGain: 2.5, fleet: 24600, maintUnit: 125, maintRed: 10,
         setScenario: function (s) {
           this.scenario = s;
           var p = scenarios[s];
