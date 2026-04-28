@@ -139,6 +139,108 @@
     }
     .chart-area svg { width: 100%; max-width: 540px; display: block; margin: 0 auto; }
 
+    /* Tab nav */
+    .tab-nav { gap: 0.4rem; }
+    .tab-nav .nav-link {
+      background: #fff;
+      color: #4b5563;
+      border: 1px solid #e5e7eb;
+      border-radius: 0.5rem;
+      padding: 0.45rem 1rem;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+    }
+    .tab-nav .nav-link.active {
+      background: #003c71;
+      color: #fff;
+      border-color: #003c71;
+    }
+    .tab-nav .nav-link:hover:not(.active) {
+      background: #f5f7fb;
+      color: #003c71;
+    }
+
+    /* Sources tab */
+    .source-card {
+      background: #fff;
+      border: 1px solid #e5e7eb;
+      border-left: 4px solid currentColor;
+      border-radius: 0.5rem;
+      padding: 1rem 1.1rem;
+      margin-bottom: 0.75rem;
+    }
+    .source-card.l1 { color: #0a7c42; }
+    .source-card.l2 { color: #003c71; }
+    .source-card.l3 { color: #5b2d8e; }
+    .source-card .source-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 1rem;
+      margin-bottom: 0.4rem;
+    }
+    .source-card .source-name {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #1a1a2e;
+    }
+    .source-card .source-default {
+      font-size: 0.85rem;
+      font-weight: 700;
+      font-variant-numeric: tabular-nums;
+      color: currentColor;
+      flex: 0 0 auto;
+    }
+    .source-card .source-meta {
+      font-size: 0.78rem;
+      color: #4b5563;
+      line-height: 1.55;
+    }
+    .source-card .source-meta dt {
+      font-weight: 700;
+      color: #374151;
+      display: inline;
+      margin-right: 0.3rem;
+    }
+    .source-card .source-meta dd {
+      display: inline;
+      margin: 0;
+    }
+    .source-card .source-meta .meta-row {
+      margin-bottom: 0.25rem;
+    }
+    .source-card .source-meta .meta-row:last-child { margin-bottom: 0; }
+
+    .layer-banner {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 0.3rem 0.7rem;
+      border-radius: 0.25rem;
+      display: inline-block;
+      margin-bottom: 0.6rem;
+      color: #fff;
+    }
+    .layer-banner.l1 { background: #0a7c42; }
+    .layer-banner.l2 { background: #003c71; }
+    .layer-banner.l3 { background: #5b2d8e; }
+
+    .calc-row {
+      font-family: ui-monospace, "SF Mono", Consolas, monospace;
+      font-size: 0.82rem;
+      padding: 0.45rem 0.75rem;
+      background: #f5f7fb;
+      border-radius: 0.3rem;
+      margin-bottom: 0.4rem;
+      color: #1a1a2e;
+    }
+    .calc-row.combined { background: #003c71; color: #fff; font-weight: 600; }
+
+    .doc-list { padding-left: 1.1rem; margin: 0; font-size: 0.82rem; line-height: 1.7; color: #374151; }
+    .doc-list li { margin-bottom: 0.2rem; }
+
     .summary-callout {
       background: #f5f7fb;
       border-left: 3px solid #003c71;
@@ -217,22 +319,33 @@
 <body class="bg-body">
   <div id="snapp-scroll-root" class="container shell py-4 py-lg-5 snapp-scroll-root" x-data="app()">
 
-    <header class="mb-4">
+    <header class="mb-3">
       <h1 class="h3 fw-bold mb-1 brand-title">Wabtec AI-Enabled Obsolescence Management</h1>
-      <p class="text-secondary mb-3">Three-layer value sensitivity model</p>
-
-      <div class="d-flex gap-2 scenario-toggle" style="max-width: 420px;">
-        <button class="btn btn-outline-secondary"
-                :class="{ 'active-scenario': scenario === 'bear' }"
-                @click="setScenario('bear')">Bear</button>
-        <button class="btn btn-outline-secondary"
-                :class="{ 'active-scenario': scenario === 'base' }"
-                @click="setScenario('base')">Base</button>
-        <button class="btn btn-outline-secondary"
-                :class="{ 'active-scenario': scenario === 'bull' }"
-                @click="setScenario('bull')">Bull</button>
-      </div>
+      <p class="text-secondary mb-0">Three-layer value sensitivity model</p>
     </header>
+
+    <ul class="nav tab-nav mb-4" role="tablist">
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" :class="{ active: tab === 'dashboard' }" @click="tab = 'dashboard'" type="button">Dashboard</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" :class="{ active: tab === 'sources' }" @click="tab = 'sources'" type="button">Sources &amp; Methodology</button>
+      </li>
+    </ul>
+
+    <div x-show="tab === 'dashboard'" x-cloak>
+
+    <div class="d-flex gap-2 scenario-toggle mb-4" style="max-width: 420px;">
+      <button class="btn btn-outline-secondary"
+              :class="{ 'active-scenario': scenario === 'bear' }"
+              @click="setScenario('bear')">Bear</button>
+      <button class="btn btn-outline-secondary"
+              :class="{ 'active-scenario': scenario === 'base' }"
+              @click="setScenario('base')">Base</button>
+      <button class="btn btn-outline-secondary"
+              :class="{ 'active-scenario': scenario === 'bull' }"
+              @click="setScenario('bull')">Bull</button>
+    </div>
 
     <div class="row g-4">
 
@@ -374,9 +487,135 @@
           <p class="summary-callout mb-3" x-text="summary()"></p>
 
           <div class="footnote">
-            <strong>Sources and assumptions:</strong> Freight services base from Wabtec Q1 2025 earnings ($863M x 4). Bookings uplift from Water OEM Demeter case (Commercial Acceleration deck, 12-15%). Service COGS estimated at ~63% of services revenue (Wabtec adjusted gross margin ~37%, Q1 2026). Maintenance cost per unit from DOE/CARB analysis ($125K/yr freight line-haul). Maintenance spend reduction from McKinsey reliability use cases slide (MVI Meeting Prep, 10-15%). Fleet size from Wabtec corporate materials (~24,600 units). Layer 3 is not additive to Layers 1 and 2: it represents the customer value proposition that enables Layer 1 bookings.
+            <strong>Quick sources:</strong> See the <a href="#" @click.prevent="tab = 'sources'" style="color:#003c71;font-weight:600">Sources &amp; Methodology</a> tab for full source documentation, rationale, and calculation logic.
           </div>
         </div>
+      </div>
+    </div>
+
+    </div>
+
+    <div x-show="tab === 'sources'" x-cloak>
+      <div class="card-panel mb-4">
+        <p class="section-label mb-2">Methodology</p>
+        <p style="font-size: 0.9rem; line-height: 1.6; color: #374151; margin-bottom: 0;">
+          This model translates AI-enabled obsolescence management into three layers of value: revenue Wabtec captures from incremental bookings (Layer 1), margin Wabtec captures from service delivery efficiency (Layer 2), and savings the customer captures from reduced maintenance spend (Layer 3, the demand driver). Each input is sourced from public Wabtec disclosures, McKinsey internal artifacts, or industry analogues. Defaults represent a conservative base case. Ranges allow stress-testing for Bull and Bear scenarios.
+        </p>
+      </div>
+
+      <span class="layer-banner l1">Layer 1: Revenue Uplift</span>
+
+      <div class="source-card l1">
+        <div class="source-head">
+          <span class="source-name">Freight services base ($B/yr)</span>
+          <span class="source-default">Default: $3.4B &middot; Range: $2.5 - $5.0B</span>
+        </div>
+        <div class="source-meta">
+          <div class="meta-row"><dt>Source:</dt><dd>Wabtec Q1 2025 earnings release, freight services segment, annualized.</dd></div>
+          <div class="meta-row"><dt>Calculation:</dt><dd>Q1 2025 freight services revenue of approximately $863M, multiplied by 4 quarters, yields a $3.4B annualized base.</dd></div>
+          <div class="meta-row"><dt>Range rationale:</dt><dd>$2.5B floor reflects the Bear case if service revenue contracts with declining new-build orders. $5.0B ceiling reflects the Bull case incorporating EVO modernization revenue ramp through 2027 and international expansion.</dd></div>
+        </div>
+      </div>
+
+      <div class="source-card l1">
+        <div class="source-head">
+          <span class="source-name">Bookings uplift (%)</span>
+          <span class="source-default">Default: 12% &middot; Range: 5 - 25%</span>
+        </div>
+        <div class="source-meta">
+          <div class="meta-row"><dt>Source:</dt><dd>Water Services OEM Demeter platform deployment (McKinsey internal), referenced in 20260327 Wabtec-McK Commercial Acceleration_vS.pdf.</dd></div>
+          <div class="meta-row"><dt>Benchmark:</dt><dd>Water OEM achieved 12 - 15% bookings uplift from AI-driven lead translation: shifting from reactive inbound RFQs to proactive, prioritized commercial pipelines.</dd></div>
+          <div class="meta-row"><dt>Range rationale:</dt><dd>5% Bear reflects slow adoption with limited account manager engagement. 25% Bull reflects mature deployment combined with predictive obsolescence detection at scale across the EVO-tier 10,000 locomotives.</dd></div>
+        </div>
+      </div>
+
+      <span class="layer-banner l2">Layer 2: Margin Improvement</span>
+
+      <div class="source-card l2">
+        <div class="source-head">
+          <span class="source-name">Service delivery COGS ($B/yr)</span>
+          <span class="source-default">Default: $2.1B &middot; Range: $1.5 - $3.5B</span>
+        </div>
+        <div class="source-meta">
+          <div class="meta-row"><dt>Source:</dt><dd>Derived from Wabtec adjusted gross margin disclosed in MVI Agent_Wabtec CEO Meeting Prep 032326.pdf.</dd></div>
+          <div class="meta-row"><dt>Calculation:</dt><dd>Wabtec Q1 2026 adjusted gross margin of approximately 37% implies a COGS ratio of 63%. Applied to the $3.4B services base, this yields about $2.1B in annual service delivery COGS.</dd></div>
+          <div class="meta-row"><dt>Range rationale:</dt><dd>Bear reflects more efficient existing operations (lower addressable COGS pool). Bull reflects margin compression scenarios where reactive sourcing and emergency parts purchases inflate the addressable COGS base.</dd></div>
+        </div>
+      </div>
+
+      <div class="source-card l2">
+        <div class="source-head">
+          <span class="source-name">Efficiency gain (%)</span>
+          <span class="source-default">Default: 2.5% &middot; Range: 1.0 - 8.0%</span>
+        </div>
+        <div class="source-meta">
+          <div class="meta-row"><dt>Source:</dt><dd>Qualitative analogues from 2025 B2B Services Growth Updated CXO vF.pptx and the Demeter case study referenced above.</dd></div>
+          <div class="meta-row"><dt>Drivers:</dt><dd>Predictive scheduling (reduces yard dwell), parts pre-staging (eliminates emergency sourcing), reduced rework (early detection of obsolete components before teardown).</dd></div>
+          <div class="meta-row"><dt>Range rationale:</dt><dd>1% Bear reflects pilot-stage deployment with limited workflow integration. 8% Bull reflects mature, multi-year deployment across the full service network with embedded AI tooling, comparable to industrial OEMs that have deployed at scale.</dd></div>
+        </div>
+      </div>
+
+      <span class="layer-banner l3">Layer 3: Customer Savings (Demand Driver)</span>
+
+      <div class="source-card l3">
+        <div class="source-head">
+          <span class="source-name">Fleet size (locomotives)</span>
+          <span class="source-default">Default: 24,600 &middot; Range: 15,000 - 30,000</span>
+        </div>
+        <div class="source-meta">
+          <div class="meta-row"><dt>Source:</dt><dd>Wabtec corporate materials and investor disclosures on installed base.</dd></div>
+          <div class="meta-row"><dt>Context:</dt><dd>Approximately 24,600 locomotives are currently in the Wabtec installed base. Of these, about 10,000 are EVO-tier units eligible for the Modernization Program and represent the highest-priority opportunity set.</dd></div>
+          <div class="meta-row"><dt>Range rationale:</dt><dd>Bear reflects an EVO-only sub-fleet view (high-priority units only). Bull reflects expansion to international fleets and adjacent rail OEM installed base.</dd></div>
+        </div>
+      </div>
+
+      <div class="source-card l3">
+        <div class="source-head">
+          <span class="source-name">Annual maintenance per unit ($K)</span>
+          <span class="source-default">Default: $125K &middot; Range: $75 - $200K</span>
+        </div>
+        <div class="source-meta">
+          <div class="meta-row"><dt>Source:</dt><dd>U.S. Department of Energy and California Air Resources Board (CARB) reports on freight line-haul locomotive operating costs.</dd></div>
+          <div class="meta-row"><dt>Context:</dt><dd>Approximately $125K per unit per year is typical for mainline freight locomotives, including parts, labor, and scheduled overhauls.</dd></div>
+          <div class="meta-row"><dt>Range rationale:</dt><dd>$75K Bear reflects switcher and yard locomotives with lighter duty cycles. $200K Bull reflects high-utilization mainline freight units approaching mid-life overhaul.</dd></div>
+        </div>
+      </div>
+
+      <div class="source-card l3">
+        <div class="source-head">
+          <span class="source-name">Maintenance spend reduction (%)</span>
+          <span class="source-default">Default: 10% &middot; Range: 5 - 20%</span>
+        </div>
+        <div class="source-meta">
+          <div class="meta-row"><dt>Source:</dt><dd>McKinsey reliability and predictive maintenance use case slide in MVI Agent_Wabtec CEO Meeting Prep 032326.pdf.</dd></div>
+          <div class="meta-row"><dt>Benchmark:</dt><dd>10 - 15% maintenance spend reduction is typical from predictive obsolescence management combined with AI-enabled scheduling. The benefit accrues to the customer.</dd></div>
+          <div class="meta-row"><dt>Range rationale:</dt><dd>5% Bear reflects skeptical view limited to parts pre-staging benefits only. 20% Bull reflects full-scale deployment combining predictive scheduling, modernization routing, and unit-level data layer integration.</dd></div>
+        </div>
+      </div>
+
+      <div class="card-panel mb-4">
+        <p class="section-label mb-3">Calculation Logic</p>
+        <div class="calc-row"><strong>Layer 1 (Wabtec revenue)</strong> = Freight services base &times; Bookings uplift %</div>
+        <div class="calc-row"><strong>Layer 2 (Wabtec EBITDA)</strong> = Service delivery COGS &times; Efficiency gain %</div>
+        <div class="calc-row"><strong>Layer 3 (Customer savings)</strong> = Fleet size &times; Annual maintenance per unit &times; Reduction %</div>
+        <div class="calc-row combined"><strong>Combined Wabtec value</strong> = Layer 1 + Layer 2 (Layer 3 is NOT additive)</div>
+        <p class="footnote mt-3 mb-0">
+          <strong>Why Layer 3 is separate:</strong> Layer 3 represents the customer's economic incentive to buy more service from Wabtec. It is the demand-side proof point that justifies the Layer 1 bookings uplift. Adding Layer 3 to Wabtec's captured value would double-count the same dollar.
+        </p>
+      </div>
+
+      <div class="card-panel">
+        <p class="section-label mb-3">Source Documents</p>
+        <ul class="doc-list">
+          <li>Wabtec Q1 2025 earnings release (investor relations, public)</li>
+          <li>Wabtec Q1 2026 earnings release and management commentary (public)</li>
+          <li>20260327 Wabtec-McK Commercial Acceleration_vS.pdf (McKinsey internal)</li>
+          <li>MVI Agent_Wabtec CEO Meeting Prep 032326.pdf (McKinsey internal)</li>
+          <li>2025 B2B Services Growth Updated CXO vF.pptx (McKinsey internal)</li>
+          <li>U.S. Department of Energy: Freight Locomotive Operating Cost Analysis (public)</li>
+          <li>California Air Resources Board (CARB): Locomotive Emissions and Operations Reports (public)</li>
+          <li>Otis Q4 2025 Earnings Call (1/8/26) and JPMorgan Industrials Conference (3/18/26): elevator modernization analogue, public</li>
+        </ul>
       </div>
     </div>
 
@@ -436,6 +675,7 @@
         bull: { servBase: 3.4, uplift: 18, servCOGS: 2.1, effGain: 4.5, fleet: 24600, maintUnit: 125, maintRed: 14 }
       };
       return {
+        tab: 'dashboard',
         scenario: 'base',
         servBase: 3.4, uplift: 12, servCOGS: 2.1, effGain: 2.5, fleet: 24600, maintUnit: 125, maintRed: 10,
         setScenario: function (s) {
