@@ -496,7 +496,7 @@
       <div class="card-panel mb-4">
         <p class="section-label mb-2">Methodology</p>
         <p style="font-size: 0.9rem; line-height: 1.6; color: #374151; margin-bottom: 0.75rem;">
-          This model translates AI-enabled obsolescence management into three layers of value: revenue Wabtec captures from incremental bookings (Layer 1), margin Wabtec captures from service delivery efficiency (Layer 2), and savings the customer captures from reduced maintenance spend (Layer 3, the demand driver). The revenue and COGS baseline are anchored to the Wabtec 2025 Annual Report. Uplift and efficiency ranges allow stress-testing across Bull, Base, and Bear scenarios.
+          This model sizes the opportunity across three layers: incremental revenue Wabtec captures from converting more of its modernization pipeline (Layer 1), margin improvement from running service operations more efficiently (Layer 2), and maintenance savings that flow to railroad customers (Layer 3). The revenue and cost baselines come from Wabtec's 2025 Annual Report. The scenario toggles let you stress-test how much of the opportunity materializes under different adoption assumptions.
         </p>
         <div style="background:#fff8f8;border-left:3px solid #C8102E;padding:0.7rem 1rem;border-radius:0.25rem;font-size:0.83rem;color:#374151;line-height:1.55;">
           <strong style="color:#C8102E;">CEO on Q1 2026 earnings call (Apr 22, 2026):</strong> "I'll probably start with obsolescence because that can drive, I think, some upside for us in terms of the opportunity to continue to modernize subsystems for our customers." — Rafael Santana, President &amp; CEO, Wabtec
@@ -511,9 +511,9 @@
           <span class="source-default">Default: $3.4B &middot; Fixed baseline</span>
         </div>
         <div class="source-meta">
-          <div class="meta-row"><dt>Source:</dt><dd>Wabtec 2025 Annual Report. Full-year freight services revenue used as the stable baseline for this model, reflecting the pre-EVO-ramp run-rate before Q1 2026 modernization delivery timing impacts.</dd></div>
-          <div class="meta-row"><dt>Key context:</dt><dd>The EVO Modernization Program represents approximately 10,000 eligible units in Wabtec's ~24,600 locomotive installed base. As EVO commercialization ramps, the $3.4B baseline represents the floor from which bookings uplift is applied.</dd></div>
-          <div class="meta-row"><dt>Range rationale:</dt><dd>Held fixed across scenarios. The scenario variable is the bookings uplift %, which reflects different assumptions about how quickly AI-enabled obsolescence management converts the pipeline.</dd></div>
+          <div class="meta-row"><dt>Source:</dt><dd>Wabtec 2025 Annual Report. Full-year freight services revenue, used as a stable starting point for the model before Q1 2026 modernization delivery timing affected the reported run-rate.</dd></div>
+          <div class="meta-row"><dt>Context:</dt><dd>About 10,000 of Wabtec's ~24,600 locomotives are targeted under the EVO Modernization Program. The $3.4B baseline is the revenue base before any uplift from faster modernization conversion is applied.</dd></div>
+          <div class="meta-row"><dt>Why it's fixed:</dt><dd>The base revenue is held constant across scenarios. What changes is the uplift percentage, which reflects different views on how much of the pipeline gets converted.</dd></div>
         </div>
       </div>
 
@@ -523,10 +523,10 @@
           <span class="source-default">Default: 15% &middot; Range: 5 - 25%</span>
         </div>
         <div class="source-meta">
-          <div class="meta-row"><dt>Source:</dt><dd>Water Services OEM Demeter platform deployment (McKinsey internal), referenced in 20260327 Wabtec-McK Commercial Acceleration_vS.pdf. CEO commentary from Q1 2026 earnings call (Apr 22, 2026).</dd></div>
-          <div class="meta-row"><dt>Benchmark:</dt><dd>Water OEM achieved 12-15% bookings uplift from AI-driven lead translation. Default raised to 15% following Wabtec CEO Rafael Santana's direct identification of obsolescence as a near-term upside driver (Q1 2026 call).</dd></div>
-          <div class="meta-row"><dt>What drives the uplift:</dt><dd>The uplift flows primarily through Services (faster modernization conversion, LTSA extensions) and Components (proactive parts pre-ordering from a living BOM registry). It does not capture potential Digital Intelligence revenue from AI platform licensing — a separate value pool.</dd></div>
-          <div class="meta-row"><dt>Range rationale:</dt><dd>5% Bear reflects slow adoption. 25% Bull reflects mature deployment across the EVO-tier 10,000 locomotives, consistent with Wabtec's $210M MBTA modernization win and multibillion-dollar mining order in Q1 2026.</dd></div>
+          <div class="meta-row"><dt>Source:</dt><dd>McKinsey case work deploying a lead translation platform for a water services OEM (internal). CEO commentary from Wabtec's Q1 2026 earnings call (Apr 22, 2026).</dd></div>
+          <div class="meta-row"><dt>Benchmark:</dt><dd>The water OEM case achieved 12-15% bookings uplift by shifting from reactive RFQs to a proactive commercial pipeline. The 15% default reflects that, plus Wabtec CEO Rafael Santana specifically calling out obsolescence management as a near-term revenue driver on the Q1 2026 call.</dd></div>
+          <div class="meta-row"><dt>What drives it:</dt><dd>Faster conversion of modernization opportunities, proactive LTSA extensions, and parts pre-ordering triggered by the BOM registry. The uplift runs through Wabtec's Services and Components businesses.</dd></div>
+          <div class="meta-row"><dt>Scenario range:</dt><dd>5% (Bear) reflects slow or partial rollout. 25% (Bull) reflects full deployment across the 10,000 EVO-eligible locomotives, in line with the commercial momentum seen in Wabtec's $210M MBTA win and large mining order in Q1 2026.</dd></div>
         </div>
       </div>
 
@@ -538,9 +538,9 @@
           <span class="source-default">Default: $2.1B &middot; Fixed baseline</span>
         </div>
         <div class="source-meta">
-          <div class="meta-row"><dt>Source:</dt><dd>Wabtec 2025 Annual Report. Derived from full-year freight services COGS, consistent with an approximately 64% blended COGS ratio on the $3.4B services base.</dd></div>
-          <div class="meta-row"><dt>Calculation:</dt><dd>64% COGS ratio applied to $3.4B freight services base yields ~$2.1B in annual service delivery COGS. This is held fixed across scenarios; the efficiency gain % drives the margin improvement regardless of scenario.</dd></div>
-          <div class="meta-row"><dt>Range rationale:</dt><dd>Held fixed. Efficiency gain % captures the scenario variability — Bear assumes 1.5% reduction in COGS, Base 2.5%, Bull 4.5%.</dd></div>
+          <div class="meta-row"><dt>Source:</dt><dd>Wabtec 2025 Annual Report. Full-year freight services cost of goods sold, consistent with a blended COGS ratio of roughly 64% on the $3.4B services revenue base.</dd></div>
+          <div class="meta-row"><dt>How it's calculated:</dt><dd>64% applied to $3.4B yields approximately $2.1B. Like the revenue base, this is held fixed — the efficiency gain percentage is what varies by scenario.</dd></div>
+          <div class="meta-row"><dt>Scenario range:</dt><dd>Bear assumes a 1.5% cost reduction, Base 2.5%, Bull 4.5%. The dollar savings scale directly from those percentages applied to the $2.1B base.</dd></div>
         </div>
       </div>
 
@@ -550,9 +550,9 @@
           <span class="source-default">Default: 2.5% &middot; Range: 1.0 - 8.0%</span>
         </div>
         <div class="source-meta">
-          <div class="meta-row"><dt>Source:</dt><dd>Qualitative analogues from 2025 B2B Services Growth Updated CXO vF.pptx and the Demeter case study referenced above.</dd></div>
-          <div class="meta-row"><dt>Drivers:</dt><dd>Predictive scheduling (reduces yard dwell time in core maintenance), parts pre-staging via BOM registry (eliminates emergency sourcing and Components margin leakage), reduced rework (early obsolescence detection before teardown). These benefits flow primarily through Wabtec's core Services and Components operations, not its Digital segment.</dd></div>
-          <div class="meta-row"><dt>Range rationale:</dt><dd>1% Bear reflects pilot-stage deployment with limited workflow integration. 8% Bull reflects mature, multi-year deployment across the full service network with embedded AI tooling, comparable to industrial OEMs that have deployed at scale.</dd></div>
+          <div class="meta-row"><dt>Source:</dt><dd>McKinsey B2B services case work and the water services OEM engagement referenced above.</dd></div>
+          <div class="meta-row"><dt>What drives it:</dt><dd>Better scheduling reduces time locomotives spend in the yard. Pre-ordering parts based on a living BOM cuts emergency sourcing costs. Catching obsolescence issues before teardown reduces rework. These are operational improvements in Wabtec's core service shops, not software-layer savings.</dd></div>
+          <div class="meta-row"><dt>Scenario range:</dt><dd>1% (Bear) reflects an early pilot with limited shop-floor integration. 8% (Bull) reflects a mature rollout across the full service network, in line with what industrial OEMs have achieved after several years of deployment.</dd></div>
         </div>
       </div>
 
@@ -564,9 +564,9 @@
           <span class="source-default">Default: 24,600 &middot; Range: 15,000 - 30,000</span>
         </div>
         <div class="source-meta">
-          <div class="meta-row"><dt>Source:</dt><dd>Wabtec corporate materials and investor disclosures on installed base.</dd></div>
-          <div class="meta-row"><dt>Context:</dt><dd>Approximately 24,600 locomotives are currently in the Wabtec installed base. Of these, about 10,000 are EVO-tier units eligible for the Modernization Program and represent the highest-priority opportunity set.</dd></div>
-          <div class="meta-row"><dt>Range rationale:</dt><dd>Bear reflects an EVO-only sub-fleet view (high-priority units only). Bull reflects expansion to international fleets and adjacent rail OEM installed base.</dd></div>
+          <div class="meta-row"><dt>Source:</dt><dd>Wabtec corporate disclosures and investor materials on installed base size.</dd></div>
+          <div class="meta-row"><dt>Context:</dt><dd>Wabtec's installed base includes approximately 24,600 locomotives globally. About 10,000 of those are EVO-tier units targeted for modernization, representing the highest-priority opportunity near-term.</dd></div>
+          <div class="meta-row"><dt>Scenario range:</dt><dd>Low end (15,000) reflects a conservative view focused only on the EVO-eligible fleet. High end (30,000) reflects expansion to international fleets and adjacent customers.</dd></div>
         </div>
       </div>
 
@@ -576,9 +576,9 @@
           <span class="source-default">Default: $125K &middot; Range: $75 - $200K</span>
         </div>
         <div class="source-meta">
-          <div class="meta-row"><dt>Source:</dt><dd>U.S. Department of Energy and California Air Resources Board (CARB) reports on freight line-haul locomotive operating costs.</dd></div>
-          <div class="meta-row"><dt>Context:</dt><dd>Approximately $125K per unit per year is typical for mainline freight locomotives, including parts, labor, and scheduled overhauls.</dd></div>
-          <div class="meta-row"><dt>Range rationale:</dt><dd>$75K Bear reflects switcher and yard locomotives with lighter duty cycles. $200K Bull reflects high-utilization mainline freight units approaching mid-life overhaul.</dd></div>
+          <div class="meta-row"><dt>Source:</dt><dd>U.S. Department of Energy and California Air Resources Board (CARB) freight locomotive operating cost reports.</dd></div>
+          <div class="meta-row"><dt>Context:</dt><dd>Roughly $125K per locomotive per year covers parts, labor, and scheduled overhauls for a typical mainline freight unit.</dd></div>
+          <div class="meta-row"><dt>Scenario range:</dt><dd>$75K (low) reflects lighter-duty switcher and yard units. $200K (high) reflects mainline freight locomotives approaching a major mid-life overhaul.</dd></div>
         </div>
       </div>
 
@@ -588,9 +588,9 @@
           <span class="source-default">Default: 10% &middot; Range: 5 - 20%</span>
         </div>
         <div class="source-meta">
-          <div class="meta-row"><dt>Source:</dt><dd>McKinsey reliability and predictive maintenance use case slide in MVI Agent_Wabtec CEO Meeting Prep 032326.pdf.</dd></div>
-          <div class="meta-row"><dt>Benchmark:</dt><dd>10 - 15% maintenance spend reduction is typical from predictive obsolescence management combined with AI-enabled scheduling. The benefit accrues to the customer.</dd></div>
-          <div class="meta-row"><dt>Range rationale:</dt><dd>5% Bear reflects skeptical view limited to parts pre-staging benefits only. 20% Bull reflects full-scale deployment combining predictive scheduling, modernization routing, and unit-level data layer integration.</dd></div>
+          <div class="meta-row"><dt>Source:</dt><dd>McKinsey reliability and maintenance use case materials from the Wabtec CEO meeting prep deck (March 2023).</dd></div>
+          <div class="meta-row"><dt>Benchmark:</dt><dd>A 10-15% reduction in maintenance spend is a reasonable expectation from proactive obsolescence management combined with better parts scheduling. The savings go to the customer, which is what makes the commercial case compelling for Wabtec.</dd></div>
+          <div class="meta-row"><dt>Scenario range:</dt><dd>5% (Bear) captures only the most straightforward parts pre-staging benefit. 20% (Bull) reflects a full deployment covering scheduling, modernization routing, and unit-level inventory management.</dd></div>
         </div>
       </div>
 
@@ -601,10 +601,10 @@
         <div class="calc-row"><strong>Layer 3 (Customer savings)</strong> = Fleet size &times; Annual maintenance per unit &times; Reduction %</div>
         <div class="calc-row combined"><strong>Combined Wabtec value</strong> = Layer 1 + Layer 2 (Layer 3 is NOT additive)</div>
         <p class="footnote mt-3 mb-2">
-          <strong>Why Layer 3 is separate:</strong> Layer 3 represents the customer's economic incentive to buy more service from Wabtec. It is the demand-side proof point that justifies the Layer 1 bookings uplift. Adding Layer 3 to Wabtec's captured value would double-count the same dollar.
+          <strong>Why Layer 3 is separate:</strong> The customer savings figure is what gives railroads a reason to buy more service from Wabtec. It is the demand-side rationale behind the Layer 1 bookings uplift. Combining it with Wabtec's revenue would count the same dollar twice.
         </p>
         <p class="footnote mt-0 mb-0" style="border-top: 1px solid #eee; padding-top: 0.5rem;">
-          <strong>What this model does not capture:</strong> Digital Intelligence platform or licensing revenue (Wabtec's fastest-growing segment, +75.7% YoY Q1 2026) that could result from commercializing the AI obsolescence layer as a standalone product. This represents a potential additional value pool — a Layer 4 — that would require separate sizing based on platform pricing and addressable fleet beyond Wabtec's own installed base.
+          <strong>What this model does not size:</strong> Revenue from commercializing the obsolescence platform itself as a product sold to other operators or OEMs. That would be a separate workstream with its own pricing and market assumptions, and is not included here.
         </p>
       </div>
 
