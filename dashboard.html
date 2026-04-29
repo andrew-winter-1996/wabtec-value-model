@@ -363,9 +363,9 @@
 
             <div class="input-row">
               <div class="input-label">Freight services base ($B/yr)</div>
-              <div class="source">Wabtec 2025 Annual Report: full-year freight services revenue baseline</div>
+              <div class="source">Wabtec 2025 10-K, p.79: 2025 Freight Services net sales of $3,055M</div>
               <div class="input-line" style="justify-content:flex-end;">
-                <span class="val">$3.4B</span>
+                <span class="val">$3.06B</span>
               </div>
             </div>
 
@@ -384,9 +384,9 @@
 
             <div class="input-row">
               <div class="input-label">Service delivery COGS ($B/yr)</div>
-              <div class="source">Wabtec 2025 Annual Report: ~64% COGS ratio on $3.4B freight services base</div>
+              <div class="source">Wabtec 2025 10-K, p.77: Freight segment 64.7% COGS ratio applied to $3.06B services base</div>
               <div class="input-line" style="justify-content:flex-end;">
-                <span class="val">$2.1B</span>
+                <span class="val">$1.98B</span>
               </div>
             </div>
 
@@ -496,7 +496,7 @@
       <div class="card-panel mb-4">
         <p class="section-label mb-2">Methodology</p>
         <p style="font-size: 0.9rem; line-height: 1.6; color: #374151; margin-bottom: 0.75rem;">
-          This model sizes the opportunity across three layers: incremental revenue Wabtec captures from converting more of its modernization pipeline (Layer 1), margin improvement from running service operations more efficiently (Layer 2), and maintenance savings that flow to railroad customers (Layer 3). The revenue and cost baselines come from Wabtec's 2025 Annual Report. The scenario toggles let you stress-test how much of the opportunity materializes under different adoption assumptions.
+          This model sizes the opportunity across three layers: incremental revenue Wabtec captures from converting more of its modernization pipeline (Layer 1), margin improvement from running service operations more efficiently (Layer 2), and maintenance savings that flow to railroad customers (Layer 3). The revenue and cost baselines come from Wabtec's 2025 10-K (Net sales by product line, p.79; segment cost of sales, p.77). The scenario toggles let you stress-test how much of the opportunity materializes under different adoption assumptions.
         </p>
         <div style="background:#fff8f8;border-left:3px solid #C8102E;padding:0.7rem 1rem;border-radius:0.25rem;font-size:0.83rem;color:#374151;line-height:1.55;">
           <strong style="color:#C8102E;">CEO on Q1 2026 earnings call (Apr 22, 2026):</strong> "I'll probably start with obsolescence because that can drive, I think, some upside for us in terms of the opportunity to continue to modernize subsystems for our customers." Rafael Santana, President &amp; CEO, Wabtec
@@ -508,11 +508,11 @@
       <div class="source-card l1">
         <div class="source-head">
           <span class="source-name">Freight services base ($B/yr)</span>
-          <span class="source-default">Default: $3.4B &middot; Fixed baseline</span>
+          <span class="source-default">Default: $3.06B &middot; Fixed baseline</span>
         </div>
         <div class="source-meta">
-          <div class="meta-row"><dt>Source:</dt><dd>Wabtec 2025 Annual Report. Full-year freight services revenue, used as a stable starting point for the model before Q1 2026 modernization delivery timing affected the reported run-rate.</dd></div>
-          <div class="meta-row"><dt>Context:</dt><dd>About 10,000 of Wabtec's ~24,600 locomotives are targeted under the EVO Modernization Program. The $3.4B baseline is the revenue base before any uplift from faster modernization conversion is applied.</dd></div>
+          <div class="meta-row"><dt>Source:</dt><dd>Wabtec 2025 10-K, page 79, "Net sales to external customers by product line": Freight Segment Services revenue of $3,055M for FY2025 (vs. $3,019M in 2024 and $2,877M in 2023, both restated in Q1 2025 to reflect a reclassification of certain businesses from Services to Components).</dd></div>
+          <div class="meta-row"><dt>Context:</dt><dd>About 10,000 of Wabtec's ~24,600 locomotives are targeted under the EVO Modernization Program. The $3.06B baseline is the revenue base before any uplift from faster modernization conversion is applied.</dd></div>
           <div class="meta-row"><dt>Why it's fixed:</dt><dd>The base revenue is held constant across scenarios. What changes is the uplift percentage, which reflects different views on how much of the pipeline gets converted.</dd></div>
         </div>
       </div>
@@ -535,12 +535,12 @@
       <div class="source-card l2">
         <div class="source-head">
           <span class="source-name">Service delivery COGS ($B/yr)</span>
-          <span class="source-default">Default: $2.1B &middot; Fixed baseline</span>
+          <span class="source-default">Default: $1.98B &middot; Fixed baseline</span>
         </div>
         <div class="source-meta">
-          <div class="meta-row"><dt>Source:</dt><dd>Wabtec 2025 Annual Report. Full-year freight services cost of goods sold, consistent with a blended COGS ratio of roughly 64% on the $3.4B services revenue base.</dd></div>
-          <div class="meta-row"><dt>How it's calculated:</dt><dd>64% applied to $3.4B yields approximately $2.1B. Like the revenue base, this is held fixed; the efficiency gain percentage is what varies by scenario.</dd></div>
-          <div class="meta-row"><dt>Scenario range:</dt><dd>Bear assumes a 1.5% cost reduction, Base 2.5%, Bull 4.5%. The dollar savings scale directly from those percentages applied to the $2.1B base.</dd></div>
+          <div class="meta-row"><dt>Source:</dt><dd>Wabtec 2025 10-K, page 77, "Segment financial information": Freight Segment cost of sales of $5,201M on $8,036M of segment sales, implying a blended COGS ratio of 64.7%. The 10-K does not break out cost of sales at the product-line level, so the Services-specific COGS is estimated by applying the segment-level ratio to the $3,055M Services revenue line.</dd></div>
+          <div class="meta-row"><dt>How it's calculated:</dt><dd>64.7% applied to $3.055B yields approximately $1.98B. Like the revenue base, this is held fixed; the efficiency gain percentage is what varies by scenario.</dd></div>
+          <div class="meta-row"><dt>Scenario range:</dt><dd>Bear assumes a 1.5% cost reduction, Base 2.5%, Bull 4.5%. The dollar savings scale directly from those percentages applied to the $1.98B base.</dd></div>
         </div>
       </div>
 
@@ -596,8 +596,8 @@
 
       <div class="card-panel mb-4">
         <p class="section-label mb-3">Calculation Logic</p>
-        <div class="calc-row"><strong>Layer 1 (Revenue uplift)</strong> = Freight services base ($3.4B fixed) &times; Bookings uplift %</div>
-        <div class="calc-row"><strong>Layer 2 (COGS savings)</strong> = Service delivery COGS ($2.1B fixed) &times; Efficiency gain %</div>
+        <div class="calc-row"><strong>Layer 1 (Revenue uplift)</strong> = Freight services base ($3.06B fixed) &times; Bookings uplift %</div>
+        <div class="calc-row"><strong>Layer 2 (COGS savings)</strong> = Service delivery COGS ($1.98B fixed) &times; Efficiency gain %</div>
         <div class="calc-row"><strong>Layer 3 (Customer savings)</strong> = Fleet size &times; Annual maintenance per unit &times; Reduction %</div>
         <div class="calc-row combined"><strong>Combined Wabtec value</strong> = Layer 1 + Layer 2 (Layer 3 is NOT additive)</div>
         <p class="footnote mt-3 mb-2">
@@ -608,7 +608,7 @@
       <div class="card-panel">
         <p class="section-label mb-3">Source Documents</p>
         <ul class="doc-list">
-          <li><strong>Wabtec 2025 Annual Report</strong>: primary source for revenue and COGS baseline. Key data: full-year freight services revenue ($3.4B), blended COGS ratio (~64%), installed base of ~24,600 locomotives, EVO Modernization Program scope (public)</li>
+          <li><strong>Wabtec 2025 Form 10-K</strong>: primary source for revenue and COGS baseline. Key data: 2025 Freight Services revenue $3,055M (p.79), Freight Segment COGS ratio 64.7% (p.77), installed base disclosures, EVO Modernization Program scope (public, SEC filing)</li>
           <li>Wabtec Q1 2026 Earnings Call transcript (Apr 22, 2026): supplemental context. Key data: $2.95B total Q1 sales (+13% YoY), services down 17.3%, GAAP gross margin 36.0%, freight adj. operating margin 26.0%, first EVO commercial build completed, CEO named obsolescence as near-term upside driver (public)</li>
           <li>20260327 Wabtec-McK Commercial Acceleration_vS.pdf (McKinsey internal)</li>
           <li>MVI Agent_Wabtec CEO Meeting Prep 032326.pdf (McKinsey internal)</li>
@@ -671,14 +671,14 @@
   <script>
     function app() {
       var scenarios = {
-        bear: { servBase: 3.4, uplift: 6,  servCOGS: 2.1, effGain: 1.5, fleet: 24600, maintUnit: 125, maintRed: 6  },
-        base: { servBase: 3.4, uplift: 15, servCOGS: 2.1, effGain: 2.5, fleet: 24600, maintUnit: 125, maintRed: 10 },
-        bull: { servBase: 3.4, uplift: 22, servCOGS: 2.1, effGain: 4.5, fleet: 24600, maintUnit: 125, maintRed: 14 }
+        bear: { servBase: 3.055, uplift: 6,  servCOGS: 1.98, effGain: 1.5, fleet: 24600, maintUnit: 125, maintRed: 6  },
+        base: { servBase: 3.055, uplift: 15, servCOGS: 1.98, effGain: 2.5, fleet: 24600, maintUnit: 125, maintRed: 10 },
+        bull: { servBase: 3.055, uplift: 22, servCOGS: 1.98, effGain: 4.5, fleet: 24600, maintUnit: 125, maintRed: 14 }
       };
       return {
         tab: 'dashboard',
         scenario: 'base',
-        servBase: 3.4, uplift: 15, servCOGS: 2.1, effGain: 2.5, fleet: 24600, maintUnit: 125, maintRed: 10,
+        servBase: 3.055, uplift: 15, servCOGS: 1.98, effGain: 2.5, fleet: 24600, maintUnit: 125, maintRed: 10,
         setScenario: function (s) {
           this.scenario = s;
           var p = scenarios[s];
